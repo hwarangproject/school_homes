@@ -5,12 +5,40 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.chart-content{
+	width: 600px
+}
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+$(function(){
+	/* $('#aaa').show(); */
+	var index =0;
+	$('#print').hide();
+	$('#a').click(function(){
+		
+		if(index == 0)
+		{
+			$('#print').show();
+			index=1;
+		}
+		
+		else
+		{
+			$('#print').hide();
+			index=0;
+		}
+		
+	});
+});
+</script>
 </head>
 <body>
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.do">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -21,7 +49,7 @@
       <hr class="sidebar-divider">
 	
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
          <i class="fas fa-fw fa-folder"></i>
@@ -39,7 +67,7 @@
            <a class="collapse-item" href="blank.html">Blank Page</a>
          </div>
        </div>
-     </li>
+     </li> 
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
@@ -60,8 +88,12 @@
 
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+       <!--  <button class="rounded-circle border-0" id="sidebarToggle"></button> -->
+       <button class="rounded-circle border-0" id="a">
       </div>
     </ul>
+    <div class="chart-content" id="print" >
+      dkflsa
+    </div>
 </body>
 </html>
