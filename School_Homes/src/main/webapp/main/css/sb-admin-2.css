@@ -10648,14 +10648,14 @@ a:focus {
   }
 }
 
-/* .animated--grow-in, .sidebar .nav-item .collapse {
+.animated--grow-in, .sidebar .nav-item .collapse {
   -webkit-animation-name: growIn;
   animation-name: growIn;
   -webkit-animation-duration: 200ms;
   animation-duration: 200ms;
   -webkit-animation-timing-function: transform cubic-bezier(0.18, 1.25, 0.4, 1), opacity cubic-bezier(0, 1, 0.4, 1);
   animation-timing-function: transform cubic-bezier(0.18, 1.25, 0.4, 1), opacity cubic-bezier(0, 1, 0.4, 1);
-} */
+}
 
 @-webkit-keyframes fadeIn {
   0% {
@@ -10685,7 +10685,7 @@ a:focus {
 }
 
 .bg-gradient-primary {
-  background-color: #404040;
+  background-color: #4e73df;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(10%, #4e73df), to(#224abe));
   background-image: linear-gradient(180deg, #4e73df 10%, #224abe 100%);
   background-size: cover;
@@ -10971,7 +10971,7 @@ a:focus {
 }
 
 .topbar {
-  height: 7rem;
+  height: 4.375rem;
 }
 
 .topbar #sidebarToggleTop {
