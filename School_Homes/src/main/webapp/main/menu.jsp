@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 .chart-content{
-	width: 600px;
+	width: 450px;
 }
 
 .sidebar #custom_sidebarToggle {
@@ -69,13 +69,22 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 var index=0;
+var display=0; //스위치 변수
+var i=0;
+var a=0;
 $(function(){
-	$('#print').hide();
 	$('#custom_sidebarToggle').click(function(){
 		if(index == 0)
 		{
-			$('#print').show();
 			$('#custom_sidebarToggle').toggleClass('changed');
+			$.ajax({
+				type:'post',
+				url:'recommand.do',
+				success:function(res)
+				{
+					$('#print').html(res);
+				}
+			});
 			index=1;
 		}
 		
@@ -85,7 +94,74 @@ $(function(){
 			$('#custom_sidebarToggle').toggleClass('changed2');
 			index=0;
 		}
-		
+	});
+});
+	
+$(function(){
+	$('.recommand_panel').click(function() {
+
+		if (display == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'recommand.do',
+				success:function(res)
+				{
+					$('#print_recommand').html(res);
+				}
+			});
+			display = 1;
+		}
+
+		else {
+			$('#print_recommand').html("");
+			display = 0;
+		}
+	});
+});
+	
+$(function(){
+    $('.seouluniv_panel').click(function() {
+		if (i == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'seouluniv.do',
+				success:function(res)
+				{
+					$('#print_seouluniv').html(res);
+				}
+			});
+			i = 1;
+		}
+
+		else {
+			$('#print_seouluniv').html("");
+			i = 0;
+		}
+	});
+});
+    
+$(function(){
+    $('.schoolrate_panel').click(function() {
+
+		if (a == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'schoolrate.do',
+				success:function(res)
+				{
+					$('#print_schoolrate').html(res);
+				}
+			});
+			a = 1;
+		}
+
+		else {
+			$('#print_schoolrate').html("");
+			a = 0;
+		}
 	});
 });
 </script>
@@ -119,8 +195,8 @@ $(function(){
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-            <a class="collapse-item" href="login.html">서울대 입결</a>
-            <a class="collapse-item" href="register.html">진학률</a>
+            <a class="collapse-item seouluniv_panel">서울대 입결</a>
+            <a class="collapse-item schoolrate_panel">진학률</a>
           </div>
         </div>
       </li>
@@ -133,7 +209,7 @@ $(function(){
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link recommand_panel">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>추천</span></a>
       </li>
@@ -154,9 +230,15 @@ $(function(){
       </div>
     </ul>
     
-    <div class="chart-content" id="print" >
-      Ajax TEST
-    </div>
+    <!-- recommand -->
+    <div id="print_recommand"></div>
+    
+    <!-- seouluniv -->
+    <div id="print_seouluniv"></div>
+    
+    <!-- schoolrate -->
+    <div id="print_schoolrate"></div>
+    
     <!-- End of Sidebar -->
 </body>
 </html>
