@@ -10,4 +10,24 @@ public class MainController {
 	public String main_main(){
 		return "main";
 	}
+	
+	@RequestMapping("main/menu.do")
+	public String main_menu(){
+		return "main";
+	}
+	
+	@RequestMapping("main/recommand.do")
+	public String main_recommand(){
+		return "main/recommand";
+	}
+	
+	@RequestMapping("main/seouluniv.do")
+	public String main_seouluniv(){
+		return "main/seouluniv";
+	}
+	
+	@RequestMapping("main/schoolrate.do")
+	public String main_schoolrate(){
+		return "main/schoolrate";
+	}
 }
