@@ -43,6 +43,28 @@
 .sidebar-dark #custom_sidebarToggle::after {
     color: rgba(255,255,255,.5);
 }
+
+.mb-4{
+	margin-top: 18px;
+}
+.card{
+  margin-bottom: 15px;
+}
+#rec_header {
+	padding-top: 18px;
+}
+#slider{
+	width: 350px;
+	margin-top: 15px;
+}
+.btn-container{
+	text-align: center;
+}
+.btn-gray{
+	background-color: #f8f9fc;
+	border-color: #f8f9fc;
+	color: #404040;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
