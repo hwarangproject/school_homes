@@ -13,6 +13,8 @@ import com.sist.dao.*;
 public class MainController {
 	@Autowired
 	private AptDAO aptdao; 
+	@Autowired 
+	private OfficeDAO offdao;
 	
 	@RequestMapping("main/main.do")
 	public String main_main(){
@@ -26,9 +28,9 @@ public class MainController {
 	
 	@RequestMapping("main/select.do")
 	public String main_Test(Model model){	
-		List<AptVO> list = aptdao.apttestData("대전광역시 동구 가오동");
+		List<OfficetelVO> list = offdao.OfficetestData("대전광역시 동구");
 		
-		List<String> aptlist = new ArrayList<String>();
+		/*List<String> aptlist = new ArrayList<String>();
 		
 		for(AptVO vo : list)
 		{
@@ -38,6 +40,21 @@ public class MainController {
 				temp = vo.getAPT_NUMBER_SUB()+" ";
 			}
 			String s =vo.getAPT_ADDR()+" "+vo.getAPT_NUMBER_MAIN()+" "+temp;
+			System.out.println(s);
+			
+			aptlist.add(s);
+		}*/
+		
+		List<String> aptlist = new ArrayList<String>();
+		
+		for(OfficetelVO vo : list)
+		{
+			String temp ="";
+			if(!vo.getOFF_NUMBER_SUB().equals("0"))
+			{
+				temp = vo.getOFF_NUMBER_SUB()+" ";
+			}
+			String s =vo.getOFF_ADDR()+" "+vo.getOFF_NUMBER_MAIN()+" "+temp;
 			System.out.println(s);
 			
 			aptlist.add(s);
