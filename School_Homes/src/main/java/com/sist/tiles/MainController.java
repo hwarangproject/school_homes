@@ -10,4 +10,9 @@ public class MainController {
 	public String main_main(){
 		return "main";
 	}
+	
+	@RequestMapping("main/bu_analysis.do")
+	public String main_bu_analysis(){
+		return "main/bu_analysis";
+	}
 }
