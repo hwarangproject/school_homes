@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 .chart-content{
-	width: 600px;
+	width: 450px;
 }
 
 .sidebar #custom_sidebarToggle {
@@ -67,31 +67,122 @@
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
 <script type="text/javascript">
-var index=true;
-
-
+var index=0;
+var display=0; //스위치 변수
+var i=0;
+var a=0;
+var b=0;
 $(function(){
-	
-	$('#print').hide();
 	$('#custom_sidebarToggle').click(function(){
-		if(index)
+		if(index == 0)
 		{
-			$('#print').show();
-			$('#custom_sidebarToggle').toggleClass('changed');		
-			index=false;
+			$('#custom_sidebarToggle').toggleClass('changed');
+			$.ajax({
+				type:'post',
+				url:'recommand.do',
+				success:function(res)
+				{
+					$('#print').html(res);
+				}
+			});
+			index=1;
 		}
 		
-		else 
+		else
 		{
 			$('#print').hide();
 			$('#custom_sidebarToggle').toggleClass('changed2');
-			index=true;
+			index=0;
 		}
-		
 	});
+	
+	$('.recommand_panel').click(function() {
+
+		if (display == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'recommand.do',
+				success:function(res)
+				{
+					$('#print_recommand').html(res);
+				}
+			});
+			display = 1;
+		}
+
+		else {
+			$('#print_recommand').html("");
+			display = 0;
+		}
+	});
+	
+	$('.seouluniv_panel').click(function() {
+		if (i == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'seouluniv.do',
+				success:function(res)
+				{
+					$('#print_seouluniv').html(res);
+				}
+			});
+			i = 1;
+		}
+
+		else {
+			$('#print_seouluniv').html("");
+			i = 0;
+		}
+	});
+	
+	$('.schoolrate_panel').click(function() {
+
+		if (a == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'schoolrate.do',
+				success:function(res)
+				{
+					$('#print_schoolrate').html(res);
+				}
+			});
+			a = 1;
+		}
+
+		else {
+			$('#print_schoolrate').html("");
+			a = 0;
+		}
+	});
+	
+	$('.bu_detail_panel').click(function() {
+
+		if (b == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'bu_detail.do',
+				success:function(res)
+				{
+					$('#print_bu_detail').html(res);
+				}
+			});
+			b = 1;
+		}
+
+		else {
+			$('#print_bu_detail').html("");
+			b = 0;
+		}
+	});
+	
 });
+	
+
 </script>
 </head>
 <body>
@@ -123,21 +214,21 @@ $(function(){
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-            <a class="collapse-item" href="login.html">서울대 입결</a>
-            <a class="collapse-item" href="register.html">진학률</a>
+            <a class="collapse-item seouluniv_panel">서울대 입결</a>
+            <a class="collapse-item schoolrate_panel">진학률</a>
           </div>
         </div>
       </li>
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link bu_detail_panel">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>분석</span></a>
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link recommand_panel">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>추천</span></a>
       </li>
@@ -164,9 +255,18 @@ $(function(){
       </div>
     </ul>
     
-    <div class="chart-content" id="print" >
-      Ajax TEST
-    </div>
+    <!-- 부동산 추천 -->
+    <div id="print_recommand"></div>
+    
+    <!-- 서울대 진학순위 -->
+    <div id="print_seouluniv"></div>
+    
+    <!-- 진학률 순위 -->
+    <div id="print_schoolrate"></div>
+    
+    <!-- 부동산 디테일 -->
+    <div id="print_bu_detail"></div>
+    
     <!-- End of Sidebar -->
 </body>
 </html>

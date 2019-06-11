@@ -28,10 +28,35 @@ public class MainController {
 
 		return "main";
 	}
+	
+	 @RequestMapping("main/menu.do")
+		public String main_menu(){
+			return "main";
+		}
+		
+	 @RequestMapping("main/recommand.do")
+		public String main_recommand(){
+			return "main/recommand";
+		}
+		
+	@RequestMapping("main/seouluniv.do")
+	public String main_seouluniv(){
+		return "main/seouluniv";
+	}
+		
+		@RequestMapping("main/schoolrate.do")
+		public String main_schoolrate(){
+			return "main/schoolrate";
+		}
+		
+		@RequestMapping("main/bu_detail.do")
+		public String main_bu_detail(){
+			return "main/bu_detail";
+		}
 
 	@RequestMapping("main/select.do")
 	public String main_Test(Model model) {
-		// List<OfficetelVO> list = offdao.OfficetestData("대전광역시 동구");
+		// List<OfficetelVO> list = offdao.OfficetestData("���쟾愿묒뿭�떆 �룞援�");
 
 		/*
 		 * List<String> aptlist = new ArrayList<String>();
@@ -45,12 +70,12 @@ public class MainController {
 		 * aptlist.add(s); }
 		 */
 
-		List<OfficetelVO> list = offdao.OfficetestData("대전광역시 동구");
+		List<OfficetelVO> list = offdao.OfficetestData("���쟾愿묒뿭�떆 �룞援�");
 		List<OfficetelVO> off_list = new ArrayList<OfficetelVO>();
 
 		for (OfficetelVO vo : list) {
 
-			// 주소
+			// 二쇱냼
 			String temp = "";
 			if (!vo.getOFF_NUMBER_SUB().equals("0")) {
 				temp = vo.getOFF_NUMBER_SUB() + " ";
