@@ -95,9 +95,7 @@ $(function(){
 			index=0;
 		}
 	});
-});
 	
-$(function(){
 	$('.recommand_panel').click(function() {
 
 		if (display == 0) {
@@ -118,10 +116,8 @@ $(function(){
 			display = 0;
 		}
 	});
-});
 	
-$(function(){
-    $('.seouluniv_panel').click(function() {
+	$('.seouluniv_panel').click(function() {
 		if (i == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -140,10 +136,8 @@ $(function(){
 			i = 0;
 		}
 	});
-});
-    
-$(function(){
-    $('.schoolrate_panel').click(function() {
+	
+	$('.schoolrate_panel').click(function() {
 
 		if (a == 0) {
 			$('.panel').hide();
@@ -163,7 +157,10 @@ $(function(){
 			a = 0;
 		}
 	});
+	
 });
+	
+
 </script>
 </head>
 <body>

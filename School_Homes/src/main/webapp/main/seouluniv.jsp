@@ -23,7 +23,7 @@
 	  <hr style="border-width: 2px; border-color: #909090">
       <div class="-mb4">
 		<div class="rank-container">
-		  <table>
+		 <!--  <table>
 		    <tr class="text-center">
 		      <td class="h2 mb-0 text-gray-800" rowspan="2" width="10%">1</td>
 		      <td class="h3 mb-0 text-gray-600" width="80%">계산여자고등학교</td>	   
@@ -32,7 +32,7 @@
 		    <tr>
 		      <td class="mb-1 small" width="80%" colspan="3">서울시 동작구 도우동</td>
 		    </tr>
-		  </table>
+		  </table> -->
 		
 		  <!-- <div class="rank-number">
 		    <h1 class="h3 mb-0 text-gray-800">1</h1>
