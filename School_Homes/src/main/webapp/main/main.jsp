@@ -47,6 +47,7 @@
 
         <!-- Body START -->
       	<tiles:insertAttribute name="body"/>
+      	
         <!-- Body END -->
 
       </div>

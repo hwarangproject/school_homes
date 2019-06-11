@@ -45,23 +45,27 @@
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
 <script type="text/javascript">
-var index=0;
+var index=true;
+
+
 $(function(){
+	
 	$('#print').hide();
 	$('#custom_sidebarToggle').click(function(){
-		if(index == 0)
+		if(index)
 		{
 			$('#print').show();
-			$('#custom_sidebarToggle').toggleClass('changed');
-			index=1;
+			$('#custom_sidebarToggle').toggleClass('changed');		
+			index=false;
 		}
 		
-		else
+		else 
 		{
 			$('#print').hide();
 			$('#custom_sidebarToggle').toggleClass('changed2');
-			index=0;
+			index=true;
 		}
 		
 	});
@@ -121,6 +125,12 @@ $(function(){
         <a class="nav-link" href="tables.html">
           <i class="fas fa-fw fa-table"></i>
           <span>게시판</span></a>
+      </li>
+      
+       <li class="nav-item">
+        <a class="nav-link" href="../main/select.do">
+          <i class="fas fa-fw fa-table"></i>
+          <span>테스트</span></a>
       </li>
 
       <!-- Divider -->
