@@ -6,7 +6,7 @@
 <head>
 <meta charset="EUC-KR">
 <title>다음 지도 시작하기</title>
- <style>
+<style>
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
@@ -22,6 +22,7 @@
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
 
@@ -30,8 +31,8 @@
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=401147ea060ab849ab02edb7408de18e&libraries=services"></script>
 	<script>
-		
-
+	
+	
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new daum.maps.LatLng(36.0859751, 129.3847215), // 지도의 중심좌표
@@ -52,12 +53,28 @@
 			 var myAddress = request.getParameter("aptlist");
 		 */
 		
-		var myAddress = new Array();
+		 
+		
+		//var myAddress = new Array();
+		
 		var schooladdress= '대전광역시 동구 신기로 71';
 		
-		<c:forEach var="itemList" items="${aptlist}" >
-			myAddress.push("${itemList}");
-		</c:forEach>
+		var myAddress = $.parseJSON('<%=request.getAttribute("json")%>');
+		alert(myAddress.length);
+	   /*
+	    obj.put("off_name", vo.getOFF_NAME());
+		obj.put("off_addr", vo.getOFF_ADDR());
+		obj.put("off_found_year", vo.getOFF_FOUND_YEAR());
+		obj.put("off_price", vo.getOFF_PRICE());
+		obj.put("off_area", vo.getOFF_AREA());
+	    */
+	  
+	  	/* <c:forEach var="itemList" items="${off_addr}" varStatus="status">
+				myAddress.push("${itemList}");	
+		    </c:forEach>
+		*/
+		
+		
 	
 		var overlay  = new Array();;
 		
@@ -96,25 +113,50 @@
 											+ number + '</div>' + '</span>'
 											+ '</div>';
 									 */
-									 
-									 var content = '<div class="wrap">' + 
+									 var content;
+									if(number >0)
+									{
+									  content = '<div class="wrap">' + 
 							            '    <div class="info">' + 
 							            '        <div class="title">' + 
-							            '            카카오 스페이스닷원' + 
+							            '            '+myAddress[number-1].off_name+  
 							            '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
 							            '        </div>' + 
 							            '        <div class="body">' + 
-							           // '             <div class="img">' +
-							           // '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-							           // '           </div>' +  */
+							            '             <div class="img">' +
+							            '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+							            '           </div>' +  
 							            '            <div class="desc">' + 
-							            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
-							            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+							            '                <div class="ellipsis">'+address+'</div>' + 
+							            '                <div class="jibun ellipsis">'+myAddress[number-1].off_found_year+'년도</div>' + 
+							            '                <div class="jibun ellipsis">가격:'+myAddress[number-1].off_price+'만원,면적'+myAddress[number-1].off_area+'평</div>' + 
 							            '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">상세보기</a></div>' + 
 							            '            </div>' + 
 							            '        </div>' + 
 							            '    </div>' +    
 							            '</div>';
+									}
+									 else if(number ==0)
+									 {
+										 content = '<div class="wrap">' + 
+								            '    <div class="info">' + 
+								            '        <div class="title">' + 
+								            '            ㅁㅁ고등학교'+  
+								            '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
+								            '        </div>' + 
+								            '        <div class="body">' + 
+								           // '             <div class="img">' +
+								           // '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+								           // '           </div>' +  */
+								            '            <div class="desc">' + 
+								            '                <div class="ellipsis">대전광역시 동구 신기로 71</div>' + 
+								            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
+								            '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">상세보기</a></div>' + 
+								            '            </div>' + 
+								            '        </div>' + 
+								            '    </div>' +    
+								            '</div>';
+									 }
 									// 커스텀 오버레이가 표시될 위치입니다 
 									var position = new daum.maps.LatLng(
 											result[0].y, result[0].x);
@@ -141,12 +183,13 @@
 							});
 
 		}
+	
 
 		for (i = 0; i < myAddress.length; i++) {
 
-			myMarker(i + 1, myAddress[i]);
-		}
-		myMarker(0,  schooladdress);
+			myMarker(i + 1, myAddress[i].off_addr);
+		} 
+		myMarker(0, schooladdress);
 		
 		
 		
@@ -154,6 +197,8 @@
 		function closeOverlay(number) {
 		    overlay[number].setMap(null);     
 		}
+		
+	
 
 		
 		
