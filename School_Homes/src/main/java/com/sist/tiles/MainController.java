@@ -30,4 +30,9 @@ public class MainController {
 	public String main_schoolrate(){
 		return "main/schoolrate";
 	}
+	
+	@RequestMapping("main/bu_detail.do")
+	public String main_bu_detail(){
+		return "main/bu_detail";
+	}
 }

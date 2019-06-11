@@ -65,6 +65,7 @@
 	border-color: #f8f9fc;
 	color: #404040;
 }
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
@@ -72,6 +73,7 @@ var index=0;
 var display=0; //스위치 변수
 var i=0;
 var a=0;
+var b=0;
 $(function(){
 	$('#custom_sidebarToggle').click(function(){
 		if(index == 0)
@@ -158,6 +160,27 @@ $(function(){
 		}
 	});
 	
+	$('.bu_detail_panel').click(function() {
+
+		if (b == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'bu_detail.do',
+				success:function(res)
+				{
+					$('#print_bu_detail').html(res);
+				}
+			});
+			b = 1;
+		}
+
+		else {
+			$('#print_bu_detail').html("");
+			b = 0;
+		}
+	});
+	
 });
 	
 
@@ -200,7 +223,7 @@ $(function(){
 
       <!-- Nav Item - Charts -->
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link bu_detail_panel">
           <i class="fas fa-fw fa-chart-area"></i>
           <span>분석</span></a>
       </li>
@@ -228,14 +251,14 @@ $(function(){
     </ul>
     
     <!-- recommand -->
-    <div id="print_recommand"></div>
+    <!-- <div id="print_recommand"></div>
     
-    <!-- seouluniv -->
+    seouluniv
     <div id="print_seouluniv"></div>
     
-    <!-- schoolrate -->
-    <div id="print_schoolrate"></div>
-    
+    schoolrate
+    <div id="print_schoolrate"></div> -->
+    <div id="print_bu_detail"></div>
     <!-- End of Sidebar -->
 </body>
 </html>
