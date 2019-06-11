@@ -24,4 +24,9 @@ public class OfficeDAO {
 	{
 		return officemapper.officetestData(addr_name);
 	}
+	
+	public OfficetelVO officedetailData(String off_name)
+	{
+		return officemapper.officedetailData(off_name);
+	}
 }
