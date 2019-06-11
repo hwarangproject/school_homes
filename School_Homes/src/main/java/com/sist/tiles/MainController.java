@@ -70,7 +70,7 @@ public class MainController {
 		 * aptlist.add(s); }
 		 */
 
-		List<OfficetelVO> list = offdao.OfficetestData("���쟾愿묒뿭�떆 �룞援�");
+		List<OfficetelVO> list = offdao.OfficetestData("대전광역시 동구");
 		List<OfficetelVO> off_list = new ArrayList<OfficetelVO>();
 
 		for (OfficetelVO vo : list) {
