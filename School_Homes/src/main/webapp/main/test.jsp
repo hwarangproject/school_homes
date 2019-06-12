@@ -7,7 +7,7 @@
 <meta charset="EUC-KR">
 <title>다음 지도 시작하기</title>
 <style>
-    .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap {position: absolute;left: 0;bottom: 40px;width: 280px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
     .wrap * {padding: 0;margin: 0;}
     .wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
     .wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
@@ -36,7 +36,7 @@
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new daum.maps.LatLng(36.0859751, 129.3847215), // 지도의 중심좌표
-			level : 4
+			level : 3
 		// 지도의 확대 레벨
 		};
 
@@ -52,27 +52,12 @@
 		         "흥덕구 복대로118번길 3"  ]; 
 			 var myAddress = request.getParameter("aptlist");
 		 */
-		
-		 
-		
-		//var myAddress = new Array();
-		
-		var schooladdress= '대전광역시 동구 신기로 71';
+			
+		var schooladdress= '인천광역시 계양구 주부토로 588"';
 		
 		var myAddress = $.parseJSON('<%=request.getAttribute("json")%>');
 		alert(myAddress.length);
-	   /*
-	    obj.put("off_name", vo.getOFF_NAME());
-		obj.put("off_addr", vo.getOFF_ADDR());
-		obj.put("off_found_year", vo.getOFF_FOUND_YEAR());
-		obj.put("off_price", vo.getOFF_PRICE());
-		obj.put("off_area", vo.getOFF_AREA());
-	    */
-	  
-	  	/* <c:forEach var="itemList" items="${off_addr}" varStatus="status">
-				myAddress.push("${itemList}");	
-		    </c:forEach>
-		*/
+	
 		
 		
 	
@@ -91,31 +76,19 @@
 											result[0].y, result[0].x);
 
 									// 결과값으로 받은 위치를 마커로 표시합니다
-
+									
 									var marker = new daum.maps.Marker({
 										map : map,
 										position : coords
-									});
+									});		
 
 									// 인포윈도우로 장소에 대한 설명을 표시합니다
 
-									/* var infowindow = new daum.maps.InfoWindow({
-										// content : '<div style="width:50px;text-align:center;padding:3px 0;">I</div>'
-										content : '<div style="color:red;">'
-												+ number + '</div>'
-									});
-									infowindow.open(map, marker); */
-
-									// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-									/* var content = '<div class="customoverlay">'
-											+ '    <span class="title">'
-											+ '<div style="font-style:normal; color:red; font-weight:bold; font-size:1.0em">'
-											+ number + '</div>' + '</span>'
-											+ '</div>';
-									 */
-									 var content;
+									var content;
 									if(number >0)
 									{
+												
+										
 									  content = '<div class="wrap">' + 
 							            '    <div class="info">' + 
 							            '        <div class="title">' + 
@@ -123,21 +96,23 @@
 							            '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
 							            '        </div>' + 
 							            '        <div class="body">' + 
-							            '             <div class="img">' +
-							            '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-							            '           </div>' +  
-							            '            <div class="desc">' + 
-							            '                <div class="ellipsis">'+address+'</div>' + 
-							            '                <div class="jibun ellipsis">'+myAddress[number-1].off_found_year+'년도</div>' + 
-							            '                <div class="jibun ellipsis">가격:'+myAddress[number-1].off_price+'만원,면적'+myAddress[number-1].off_area+'평</div>' + 
+							            //'             <div class="img">' +
+							           // '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+							           // '           </div>' +  
+							           // '            <div class="desc">' + 
+							            '                <div class="ellipsis">&nbsp;&nbsp;'+address+'</div>' + 
+							            '                <div class="jibun ellipsis">&nbsp;&nbsp;건축년도: '+myAddress[number-1].off_found_year+'년도</div>' + 
+							            '                <div class="jibun ellipsis">&nbsp;&nbsp;가격:'+myAddress[number-1].off_price+'만원</div>' + 
+							            '                <div class="jibun ellipsis">&nbsp;&nbsp;면적:'+myAddress[number-1].off_area+'평</div>' + 
 							            '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">상세보기</a></div>' + 
-							            '            </div>' + 
+							            //'            </div>' + 
 							            '        </div>' + 
 							            '    </div>' +    
 							            '</div>';
 									}
-									 else if(number ==0)
+									 else if(number ==0) // 학교
 									 {
+										 
 										 content = '<div class="wrap">' + 
 								            '    <div class="info">' + 
 								            '        <div class="title">' + 
@@ -145,9 +120,9 @@
 								            '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
 								            '        </div>' + 
 								            '        <div class="body">' + 
-								           // '             <div class="img">' +
-								           // '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
-								           // '           </div>' +  */
+								            '             <div class="img">' +
+								            '                <img src="../main/img/school_img.jpg" width="73" height="70">' +
+								            '           </div>' +  
 								            '            <div class="desc">' + 
 								            '                <div class="ellipsis">대전광역시 동구 신기로 71</div>' + 
 								            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
@@ -157,6 +132,8 @@
 								            '    </div>' +    
 								            '</div>';
 									 }
+									
+									
 									// 커스텀 오버레이가 표시될 위치입니다 
 									var position = new daum.maps.LatLng(
 											result[0].y, result[0].x);

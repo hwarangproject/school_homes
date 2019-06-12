@@ -23,7 +23,7 @@ OFF_FLOOR            NUMBER
 @Setter
 public class OfficetelVO {
 
-	private String OFF_ADDR;
+	/*private String OFF_ADDR;
 	private String OFF_NUMBER;
 	private String OFF_NUMBER_MAIN;
 	private String OFF_NUMBER_SUB;
@@ -35,5 +35,21 @@ public class OfficetelVO {
 	private int OFF_CONTRACT_YM;     
 	private int OFF_AREA;        
 	private int OFF_NO;        
-	private int OFF_FLOOR;   
+	private int OFF_FLOOR; */  
+	private String ADDR;
+	private String NUMBER1;
+	private String NUMBER_MAIN;
+	private String NUMBER_SUB;
+	private String building_NAME;
+	private String CONTRACT_DATE;
+	private String FOUND_YEAR; 
+	private String ROAD_NAME;  
+	private int PRICE; 
+	private int CONTRACT_YM;     
+	private int AREA;        
+	private int build_No;        
+	private int FLOOR;
+	
+	private String LOT_AREA; 
+	
 }

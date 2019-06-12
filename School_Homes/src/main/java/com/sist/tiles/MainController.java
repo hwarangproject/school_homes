@@ -29,67 +29,6 @@ public class MainController {
 		return "main";
 	}
 
-	@RequestMapping("main/select.do")
-	public String main_Test(Model model) {
-		// List<OfficetelVO> list = offdao.OfficetestData("대전광역시 동구");
 
-		/*
-		 * List<String> aptlist = new ArrayList<String>();
-		 * 
-		 * for(AptVO vo : list) { String temp ="";
-		 * if(!vo.getAPT_NUMBER_SUB().equals("0")) { temp =
-		 * vo.getAPT_NUMBER_SUB()+" "; } String s
-		 * =vo.getAPT_ADDR()+" "+vo.getAPT_NUMBER_MAIN()+" "+temp;
-		 * System.out.println(s);
-		 * 
-		 * aptlist.add(s); }
-		 */
-
-		List<OfficetelVO> list = offdao.OfficetestData("대전광역시 동구");
-		List<OfficetelVO> off_list = new ArrayList<OfficetelVO>();
-
-		for (OfficetelVO vo : list) {
-
-			// 주소
-			String temp = "";
-			if (!vo.getOFF_NUMBER_SUB().equals("0")) {
-				temp = vo.getOFF_NUMBER_SUB() + " ";
-			}
-			String s = vo.getOFF_ADDR() + " " + vo.getOFF_NUMBER_MAIN() + " " + temp;
-
-			OfficetelVO detailvo = offdao.officedetailData(vo.getOFF_NAME());
-
-			System.out.println("test:" + detailvo.getOFF_FOUND_YEAR());
-
-			detailvo.setOFF_ADDR(s);
-			detailvo.setOFF_NAME(vo.getOFF_NAME());
-
-			off_list.add(detailvo);
-
-		}
-
-		
-		
-		JSONArray arr = new JSONArray();
-		for (OfficetelVO vo : off_list) {
-			JSONObject obj = new JSONObject();
-			obj.put("off_name", vo.getOFF_NAME().replace("\"", "").trim());
-			obj.put("off_addr", vo.getOFF_ADDR());
-			obj.put("off_found_year", vo.getOFF_FOUND_YEAR());
-			obj.put("off_price", vo.getOFF_PRICE());
-			obj.put("off_area", vo.getOFF_AREA());
-			
-			System.out.println(vo.getOFF_NAME());
-			System.out.println(vo.getOFF_ADDR());
-			System.out.println(vo.getOFF_FOUND_YEAR());
-			System.out.println(vo.getOFF_PRICE());
-			System.out.println(vo.getOFF_AREA());
-			arr.add(obj);
-		}
-
-		System.out.println(off_list.size());
-		model.addAttribute("json", arr.toJSONString());
-		return "main/test";
-	}
 
 }
