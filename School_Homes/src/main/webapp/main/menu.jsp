@@ -232,10 +232,16 @@ $(function(){
           <i class="fas fa-fw fa-chart-area"></i>
           <span>추천</span></a>
       </li>
-
+		<!-- News Table -->
+	  <li class="nav-item">
+        <a class="nav-link" href="../news/list.do">
+          <i class="fas fa-fw fa-table"></i>
+          <span>뉴스</span></a>
+      </li>
+		
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="../board/list.do">
           <i class="fas fa-fw fa-table"></i>
           <span>게시판</span></a>
       </li>

@@ -21,8 +21,8 @@ public class BoardDAO extends SqlSessionDaoSupport{
 		super.setSqlSessionFactory(sqlSessionFactory);
 	}
 	
-	// 목록 
-	public List<BoardVO> boardAllData(int page)
+
+               public List<BoardVO> boardAllData(int page)
 	{
 		List<BoardVO> list=new ArrayList<BoardVO>();
 		int rowSize=10;
@@ -38,23 +38,23 @@ public class BoardDAO extends SqlSessionDaoSupport{
 		return list;
 	}
 	
-	// 총페이지
-	public int boardTotalPage()
+
+               public int boardTotalPage()
 	{
 		int total=getSqlSession().selectOne("boardTotalPage");
 		
 		return total;
 	}
 	
-	// 총갯수 
-	public int boardRowCount()
+
+               public int boardRowCount()
 	{
 		int count=getSqlSession().selectOne("boardRowCount");
 		return count;
 	}
 	
-	// 추가
-	public void boardInsert(BoardVO vo)
+
+               public void boardInsert(BoardVO vo)
 	{
 		Map map=new HashMap();
 		map.put("pName", vo.getName());
@@ -93,19 +93,20 @@ public class BoardDAO extends SqlSessionDaoSupport{
 	public boolean boardUpdateOk(BoardVO vo)
 	{
 		boolean bCheck=false;
-		// 비밀번호 검색 
-		Map map=new HashMap();
+
+                              Map map=new HashMap();
 		map.put("pNo", vo.getNo());
 		
 		getSqlSession().update("boardGetPwd",map);
 		String db_pwd=(String)map.get("pPwd");
 		System.out.println("db_pwd:"+db_pwd);
 		System.out.println("vo:"+vo.getPwd());
-		// 비밀번호 체크
+
 		if(db_pwd.equals(vo.getPwd()))
 		{
 			bCheck=true;
-			// 실제 수정 
+
+
 			map.put("pName", vo.getName());
 			map.put("pEmail", vo.getEmail());
 			map.put("pSubject", vo.getSubject());
@@ -122,7 +123,8 @@ public class BoardDAO extends SqlSessionDaoSupport{
 	public boolean boardDelete(int no,String pwd)
 	{
 		boolean bCheck=false;
-		// 비밀번호 검색 
+
+
 		Map map=new HashMap();
 		map.put("pNo", no);
 		
@@ -132,7 +134,6 @@ public class BoardDAO extends SqlSessionDaoSupport{
 		if(db_pwd.equals(pwd))
 		{
 			bCheck=true;
-			// 삭제 
 			map.put("pNo", no);
 			getSqlSession().update("boardDelete",map);
 		}

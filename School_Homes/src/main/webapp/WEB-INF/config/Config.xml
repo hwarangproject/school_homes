@@ -5,6 +5,6 @@
     <typeAlias type="com.sist.dao.BoardVO" alias="BoardVO"/>
   </typeAliases>
   <mappers>
-    <mapper resource="com/sist/dao/board-mapper.xml"/>
-  </mappers>
+<mapper resource="com/sist/mapper/board-mapper.xml"/>
+</mappers>
 </configuration>
