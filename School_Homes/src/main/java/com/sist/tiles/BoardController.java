@@ -10,7 +10,7 @@ import com.sist.dao.*;
 public class BoardController {
    @Autowired
    private BoardDAO dao;
-   @RequestMapping("board/list.do")
+   @RequestMapping("main/list.do")
    public String board_list(String page,Model model)
    {
 	   if(page==null)
@@ -21,12 +21,12 @@ public class BoardController {
 	   
 	   model.addAttribute("list", list);
 	   
-	   // 총페이지
+	  
 	   int totalpage=dao.boardTotalPage();
-	   // 게시물 총 갯수
+	   
 	   int count=dao.boardRowCount();
 	   
-	   //  JSP로 전송 
+	  
 	   model.addAttribute("curpage", curpage);
 	   model.addAttribute("totalpage", totalpage);
 	   model.addAttribute("count", count);
@@ -46,9 +46,9 @@ public class BoardController {
    @RequestMapping("board/detail.do")
    public String board_detail(int no,Model model)
    {
-	   // 처리 => MyBatis
+	  
 	   BoardVO vo=dao.boardDetailData(no);
-	   // JSP로 전송 
+	   
 	   model.addAttribute("vo", vo);
 	   return "board/detail";
    }
@@ -56,16 +56,16 @@ public class BoardController {
    @RequestMapping("board/update.do")
    public String board_update(int no,Model model)
    {
-	   // MyBatis처리 
+	   // 
 	   BoardVO vo=dao.boardUpdateData(no);
 	   model.addAttribute("vo", vo);
-	   return "board/update";// forward => request의 값을 유지하기 위해서  
+	   return "board/update";// 
    }
    
    @RequestMapping("board/update_ok.do")
    public String board_update_ok(BoardVO vo,Model model)
    {
-	   // MyBatis처리 
+	   // 
 	   boolean bCheck=dao.boardUpdateOk(vo);
 	   System.out.println("bCheck:"+bCheck);
 	   model.addAttribute("bCheck", bCheck);

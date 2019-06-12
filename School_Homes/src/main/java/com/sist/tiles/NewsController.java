@@ -13,7 +13,7 @@ public class NewsController {
 	@Autowired
 	private NewsManager mgr;
 
-	@RequestMapping("news/list.do")
+	@RequestMapping("main/news.do")
 	public String newsAllData(String data, Model model) {
 		if (data == null)
 			data = "ºÎµ¿»ê";
@@ -25,6 +25,6 @@ public class NewsController {
 	
 		model.addAttribute("list", list);
 		model.addAttribute("title", data);
-		return "news/list";
+		return "main/news";
 	}
 }

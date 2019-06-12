@@ -12,6 +12,11 @@ public interface SeoulunivMapper {
 	public List<SeoulunivVO> SeoulunivAllData();
 	
 	// 널 값 처리
+	@Select("SELECT count(*) FROM highinfo_basic WHERE schoolno = #{schoolno}")
+	public int schoolbasic_count(String schoolno); 
+	
+	// 학교 주소 가져오기
+	@Select("SELECT * FROM highinfo_basic WHERE schoolno = #{schoolno}")
 	@Select("SELECT count(*) FROM highinfo_basic WHERE schoolno=#{schoolno}")
 	public int schoolbasic_count(String schoolno);
 	
