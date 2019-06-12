@@ -1,4 +1,4 @@
-package com.sist.tiles;
+﻿package com.sist.tiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,26 +29,16 @@ public class MainController {
 		return "main";
 	}
 	
-	 @RequestMapping("main/menu.do")
-		public String main_menu(){
-			return "main";
-		}
-		
-	 @RequestMapping("main/recommand.do")
-		public String main_recommand(){
-			return "main/recommand";
-		}
-		
-	@RequestMapping("main/seouluniv.do")
-	public String main_seouluniv(){
-		return "main/seouluniv";
+	@RequestMapping("main/menu.do")
+	public String main_menu(){
+		return "main";
 	}
-		
-		@RequestMapping("main/schoolrate.do")
-		public String main_schoolrate(){
-			return "main/schoolrate";
-		}
-		
+	
+	@RequestMapping("main/recommand.do")
+	public String main_recommand(){
+		return "main/recommand";
+	}
+
 		@RequestMapping("main/bu_detail.do")
 		public String main_bu_detail(){
 			return "main/bu_detail";
@@ -116,5 +106,5 @@ public class MainController {
 		model.addAttribute("json", arr.toJSONString());
 		return "main/test";
 	}
-
+	
 }

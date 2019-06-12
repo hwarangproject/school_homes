@@ -42,12 +42,7 @@
 					
 					<div class="h5 mb-0 font-weight-bold text-gray-800">최소 평형</div>	
 					 
-					   <input type="radio" class="radio btn btn-gray" name="size" id="okay" value="okay"/> <label for="okay">상관없음</label>
-					   <input type="radio" class="radio" name="size" id="up20" value="okay"/> <label for="up20">20평 이상</label>
-					   <input type="radio" class="radio" name="size" id="up30" value="okay"/> <label for="up30">30평 이상</label>
-					   <input type="radio" class="radio" name="size" id="up40" value="okay"/> <label for="up40">40평 이상</label>
-					   <input type="radio" class="radio" name="size" id="up50" value="okay"/> <label for="up50">50평 이상</label>
-					 
+					
 				</div>
 				
 			</div>
