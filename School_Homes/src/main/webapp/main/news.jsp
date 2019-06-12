@@ -11,13 +11,10 @@
 .news-title{
   margin-top: 18px;
 }
-
-
-
 </style>
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="chart-content panel" id="print_news">
           <!-- Page Heading -->
           <div class="news-title">
             <h1 class="h3 mb-2 text-gray-800">NEWS</h1>

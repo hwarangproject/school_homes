@@ -28,57 +28,46 @@ width:100%;
 		<div class="card-header">서울대 입결 순위</div>
 		<div class="container-fluid">
 			<div class="content" id="rec_header">
-				<h1 class="h3 mb-0 text-gray-800">서울대 입결 순위</h1>
-				<p class="mb-4" style="font-size: 14px">2018년에 서울대에 입학한 학생 수를
-					기준으로 한 순위입니다.</p>
+				<p class="mb-4" style="font-size: 14px">2018년도 서울대에 입학한 학생 수를 기준으로 한 순위입니다.</p>
 			</div>
 			<hr style="border-width: 2px; border-color: #909090">
-			<!-- <div class="-mb4">
-		<div class="rank-container"> -->
-			<div class="table-responsive">
+			
+			<!-- 스크롤 설정 -->
+			<div class="table-responsive" style="overflow:auto; width:400px; height:700px;">
 				<table class="table" id="dataTable">
-				 <c:forEach var="svo" items="${list }" varStatus="i">
-						<c:if test="${i.index<10 }">
+					<c:forEach var="svo" items="${list }" varStatus="i">
+						<c:if test="${i.index<100 }">
 							<tr>
 								<td class="h2 mb-0 text-gray-800 text-center" rowspan="3" width="25%" id="rank" align="center" valign="middle" 
-									style="padding-top: 30px; font-size: 20px">
+									style="padding-top: 20px; font-size: 30px">
 									${i.count }
 								</td>
 								<td class="mb-0 text-gray-800 text-center" rowspan="2" width="50%" width="25%" height="75%"  align="center" valign="middle" 
-								style="font-size:15px; padding-top: 10px; padding-bottom: 5px">
-									${svo.schoolname }
+								style="font-size:13px; padding-top: 10px; padding-bottom: 5px; font-weight: bold">
+									<!-- 학교 상세정보로 이동 -->
+									<a href="#">${svo.schoolname }</a>									
 								</td>
 								<td class="mb-0 text-gray-800 text-center" rowspan="3" width="25%" 
-								style="font-size:15px; padding-top: 30px" >
-									${svo.admission_total }
+								style="font-size:20px; padding-top: 20px" >
+									${svo.admission_total }명
 								</td>
 							</tr>
 		
 							<tr>
-								
+								<!-- 표 설정을 위한 tr -->
 							</tr>
-							<!-- <tr>
-								<td class="mb-0 text-gray-800 text-center" style="font-size:12px">아무거나</td>	
-							</tr> -->
+							
 							<tr>						
-								<td class="mb-0 text-gray-800 text-center" style="font-size:12px">${blist[i.index].addr }</td>					
+								<td class="mb-0 text-gray-800 text-center" style="font-size:10px">
+									<!-- 학교 주소로 이동(지도) -->
+									<a href="#">${blist[i.index].addr }</a>
+								</td>					
 							</tr>
 						</c:if>
-					</c:forEach> 													
+					</c:forEach>													
 				</table>
-
-<!-- 		<div>
-			 순위
 			</div>
-			<div>
-			학교명
-			</div>
-			<div>
-			명수
-			</div> -->
-			
 		</div>
-	</div>
 	</div>
 
 </body>
