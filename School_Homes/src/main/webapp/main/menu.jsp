@@ -232,6 +232,26 @@ $(function(){
 		}
 	});
 	
+	$('.schoolinfo_panel').click(function() {
+		if (d == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'schoolinfo.do',
+				success:function(res)
+				{
+					$('#print_schoolinfo').html(res);
+				}
+			});
+			d = 1;
+		}
+
+		else {
+			$('#print_schoolinfo').html("");
+			d = 0;
+		}
+   });
+	
 });
 	
 function drawVisualization() {
@@ -257,26 +277,8 @@ function drawVisualization() {
     chart.draw(data, options);
 }
 
-	$('.schoolinfo_panel').click(function() {
-		if (d == 0) {
-			$('.panel').hide();
-			$.ajax({
-				type:'post',
-				url:'schoolinfo.do',
-				success:function(res)
-				{
-					$('#print_schoolinfo').html(res);
-				}
-			});
-			d = 1;
-		}
+	
 
-		else {
-			$('#print_schoolinfo').html("");
-			d = 0;
-		}
-   });
-});
 	
 </script>
 </head>
