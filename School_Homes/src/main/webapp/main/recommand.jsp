@@ -8,7 +8,7 @@
 </head>
 <body>
   <!-- recommend -->
-	<div class="chart-content" id="print">
+	<div class="chart-content panel" id="print_recommand">
 		<div class="card-header">아파트 추천</div>
 		<div class="container-fluid">
 			<div class="content" id="rec_header">
