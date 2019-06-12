@@ -9,7 +9,6 @@
 .chart-content{
 	width: 450px;
 }
-
 .sidebar #custom_sidebarToggle {
     width: 2.5rem;
     height: 2.5rem;
@@ -29,7 +28,6 @@
     font-family: 'Font Awesome 5 Free';
     margin-right: .1rem;
 }
-
 #custom_sidebarToggle.changed2::after {
     font-weight: 900;
     content: '\f105';
@@ -39,11 +37,9 @@
 .sidebar-dark #custom_sidebarToggle {
     background-color: rgba(255,255,255,.2);
 }
-
 .sidebar-dark #custom_sidebarToggle::after {
     color: rgba(255,255,255,.5);
 }
-
 .mb-4{
 	margin-top: 18px;
 }
@@ -73,7 +69,7 @@ var display=0; //스위치 변수
 var i=0;
 var a=0;
 var b=0;
-
+var d=0;
 $(function(){
 	$('#custom_sidebarToggle').click(function(){
 		if(index == 0)
@@ -99,7 +95,6 @@ $(function(){
 	});
 	
 	$('.recommand_panel').click(function() {
-
 		if (display == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -112,7 +107,6 @@ $(function(){
 			});
 			display = 1;
 		}
-
 		else {
 			$('#print_recommand').html("");
 			display = 0;
@@ -132,7 +126,6 @@ $(function(){
 			});
 			i = 1;
 		}
-
 		else {
 			$('#print_seouluniv').html("");
 			i = 0;
@@ -140,7 +133,6 @@ $(function(){
 	});
 	
 	$('.schoolrate_panel').click(function() {
-
 		if (a == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -153,7 +145,6 @@ $(function(){
 			});
 			a = 1;
 		}
-
 		else {
 			$('#print_schoolrate').html("");
 			a = 0;
@@ -161,7 +152,6 @@ $(function(){
 	});
 	
 	$('.bu_detail_panel').click(function() {
-
 		if (b == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -174,16 +164,33 @@ $(function(){
 			});
 			b = 1;
 		}
-
 		else {
 			$('#print_bu_detail').html("");
 			b = 0;
 		}
 	});
 
+	$('.schoolinfo_panel').click(function() {
+		if (d == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'schoolinfo.do',
+				success:function(res)
+				{
+					$('#print_schoolinfo').html(res);
+				}
+			});
+			d = 1;
+		}
+
+		else {
+			$('#print_schoolinfo').html("");
+			d = 0;
+		}
+   });
 });
 	
-
 </script>
 </head>
 <body>
@@ -274,6 +281,9 @@ $(function(){
     
     <!-- 부동산 디테일 -->
     <div id="print_bu_detail"></div>
+
+    <!-- 학교정보 디테일 -->
+    <div id="print_schoolinfo"></div>
     
     <!-- End of Sidebar -->
 </body>
