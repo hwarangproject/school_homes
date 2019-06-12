@@ -66,6 +66,34 @@
 	color: #404040;
 }
 </style>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <!--   <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawVisualization);
+
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        var data = google.visualization.arrayToDataTable([
+          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+          ['2004/05',  165,      938,         522,             998,           450,      614.6],
+          ['2005/06',  135,      1120,        599,             1268,          288,      682],
+          ['2006/07',  157,      1167,        587,             807,           397,      623],
+          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
+          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+        ]);
+
+        var options = {
+          title : 'Monthly Coffee Production by Country',
+          vAxis: {title: 'Cups'},
+          hAxis: {title: 'Month'},
+          seriesType: 'bars',
+          series: {5: {type: 'line'}}
+        };
+
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script> -->
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 var index=0;
@@ -73,7 +101,9 @@ var display=0; //스위치 변수
 var i=0;
 var a=0;
 var b=0;
+var c=0;
 $(function(){
+	
 	$('#custom_sidebarToggle').click(function(){
 		if(index == 0)
 		{
@@ -98,7 +128,6 @@ $(function(){
 	});
 	
 	$('.recommand_panel').click(function() {
-
 		if (display == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -119,6 +148,7 @@ $(function(){
 	});
 	
 	$('.seouluniv_panel').click(function() {
+		
 		if (i == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -126,7 +156,9 @@ $(function(){
 				url:'seouluniv.do',
 				success:function(res)
 				{
+					
 					$('#print_seouluniv').html(res);
+					
 				}
 			});
 			i = 1;
@@ -138,8 +170,7 @@ $(function(){
 		}
 	});
 	
-	$('.schoolrate_panel').click(function() {
-
+	$('.schoolrate_panel').click(function() {	
 		if (a == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -159,8 +190,7 @@ $(function(){
 		}
 	});
 	
-	$('.bu_detail_panel').click(function() {
-
+	$('.bu_detail_panel').click(function() {		
 		if (b == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -168,8 +198,12 @@ $(function(){
 				url:'bu_detail.do',
 				success:function(res)
 				{
+					
 					$('#print_bu_detail').html(res);
-				}
+					google.charts.load('current', {'packages':['corechart']});
+				    google.charts.setOnLoadCallback(drawVisualization);
+				    drawVisualization();
+				}   
 			});
 			b = 1;
 		}
@@ -180,9 +214,50 @@ $(function(){
 		}
 	});
 	
+	$('.news_panel').click(function() {		
+		if (c == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'news.do',
+				success:function(res)
+				{
+					$('#print_news').html(res);
+				}   
+			});
+			c = 1;
+		}
+
+		else {
+			$('#print_news').html("");
+			c = 0;
+		}
+	});
+	
 });
 	
+function drawVisualization() {
+    // Some raw data (not necessarily accurate)
+    var data = google.visualization.arrayToDataTable([
+      ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
+      ['2004/05',  165,      938,         522,             998,           450,      614.6],
+      ['2005/06',  135,      1120,        599,             1268,          288,      682],
+      ['2006/07',  157,      1167,        587,             807,           397,      623],
+      ['2007/08',  139,      1110,        615,             968,           215,      609.4],
+      ['2008/09',  136,      691,         629,             1026,          366,      569.6]
+    ]);
 
+    var options = {
+      title : 'Monthly Coffee Production by Country',
+      vAxis: {title: 'Cups'},
+      hAxis: {title: 'Month'},
+      seriesType: 'bars',
+      series: {5: {type: 'line'}}
+    };
+
+    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+}
 </script>
 </head>
 <body>
@@ -190,7 +265,7 @@ $(function(){
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../main/main.do">
         <div class="sidebar-brand-icon rotate-n-15">
           <!-- <i class="fas fa-laugh-wink"></i> -->
         </div>
@@ -208,12 +283,11 @@ $(function(){
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
+          <i class="fas fa-school"></i>
           <span>학교랭킹</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <!-- <h6 class="collapse-header">Login Screens:</h6> -->
             <a class="collapse-item seouluniv_panel">서울대 입결</a>
             <a class="collapse-item schoolrate_panel">진학률</a>
           </div>
@@ -229,19 +303,19 @@ $(function(){
       
       <li class="nav-item">
         <a class="nav-link recommand_panel">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>추천</span></a>
+          <i class="fas fa-thumbs-up"></i>
+          <span>추천</span></a>	
       </li>
 		<!-- News Table -->
 	  <li class="nav-item">
-        <a class="nav-link" href="../news/list.do">
-          <i class="fas fa-fw fa-table"></i>
+        <a class="nav-link news_panel">
+          <i class="far fa-newspaper"></i>
           <span>뉴스</span></a>
       </li>
 		
       <!-- Nav Item - Tables -->
       <li class="nav-item">
-        <a class="nav-link" href="../board/list.do">
+        <a class="nav-link" href="../main/list.do">
           <i class="fas fa-fw fa-table"></i>
           <span>게시판</span></a>
       </li>
@@ -272,6 +346,10 @@ $(function(){
     
     <!-- 부동산 디테일 -->
     <div id="print_bu_detail"></div>
+    
+    <!-- 뉴스 -->
+    <div id="print_news"></div>
+    
     
     <!-- End of Sidebar -->
 </body>

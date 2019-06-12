@@ -8,13 +8,15 @@ import com.sist.vo.OfficetelVO;
 
 public interface Officemapper {
    //오피스텔 
-   @Select("SELECT DISTINCT off_addr, off_number_main, off_number_sub, off_name FROM officetel where off_addr like '%' || #{addr_name} || '%'")
+   @Select("SELECT DISTINCT addr, number_main, number_sub, building_name FROM officetel where addr like '%' || #{addr_name} || '%'")
    public List<OfficetelVO> officetestData(String addr_name);
    
-   @Select("SELECT ROUND(AVG(off_found_year)) as off_found_year, ROUND(AVG(off_price)) as off_price, ROUND(AVG(off_area),1) as off_area from officetel where off_name = #{off_name}")
-   public OfficetelVO officedetailData(String off_name);
+   @Select("SELECT ROUND(AVG(found_year)) as found_year, ROUND(AVG(price)) as price, ROUND(AVG( area),1) as  area from officetel where  building_name = #{ building_name}")
+   public OfficetelVO officedetailData(String  name);
    
-   @Select("SELECT ROUND(AVG(off_found_year)) as off_found_year, ROUND(AVG(off_price)) as off_price, ROUND(AVG(off_area),1) as off_area from officetel where off_name like '%' || #{off_name} || '%'")
-   public OfficetelVO officedetailData2(String off_name);
+   @Select("SELECT ROUND(AVG( found_year)) as  found_year, ROUND(AVG( price)) as  price, ROUND(AVG( area),1) as  area from officetel where  building_name like '%' || #{ building_name} || '%'")
+   public OfficetelVO officedetailData2(String  name);
    
+   @Select("SELECT DISTINCT * FROM officetel where  addr like '%' || #{addr_name} || '%'")
+   public List<OfficetelVO> officeAnalysisData(String addr_name);
 }

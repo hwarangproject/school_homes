@@ -22,11 +22,13 @@ OFF_FLOOR            NUMBER
 @Getter
 @Setter
 public class OfficetelVO {
-
-	private String OFF_ADDR;
-	private String OFF_NUMBER;
-	private String OFF_NUMBER_MAIN;
-	private String OFF_NUMBER_SUB;
+/*
+ * ADDR, NUMBER1, NUMBER_MAIN, NUMBER_SUB, BUILDING_NAME, CONTRACT_DATE, FOUND_YEAR, ROAD_NAME, PRICE, CONTRACT_YM, AREA, BUILD_NO, FLOOR
+ */
+	private String ADDR;
+	private String NUMBER;
+	private String NUMBER_MAIN;
+	private String OF_NUMBER_SUB;
 	private String OFF_NAME;
 	private String OFF_CONTRACT_DATE;
 	private String OFF_FOUND_YEAR; 

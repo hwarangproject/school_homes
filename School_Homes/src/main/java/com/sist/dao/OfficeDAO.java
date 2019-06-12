@@ -25,6 +25,9 @@ public class OfficeDAO {
          return officemapper.officedetailData2(off_name);
        else
           return officemapper.officedetailData(off_name);
-      
    }
+  /* 
+   public List<>*/
+   
+   
 }
