@@ -16,13 +16,13 @@ public class NewsController {
 	@RequestMapping("news/list.do")
 	public String newsAllData(String data, Model model) {
 		if (data == null)
-			data = "ë¶€ë™ì‚°";
+			data = "ºÎµ¿»ê";
 		List<Item> list = mgr.newsAllData(data);
 
 		for (Item i : list) {
 			i.setRegdate(new Date(i.getPubDate()));
 		}
-		// ì „ì†¡
+	
 		model.addAttribute("list", list);
 		model.addAttribute("title", data);
 		return "news/list";

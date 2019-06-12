@@ -7,17 +7,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.news-title{
+  margin-top: 18px;
+}
+
+
+
+</style>
 </head>
 <body>
   <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">NEWS</h1>
-
+          <div class="news-title">
+            <h1 class="h3 mb-2 text-gray-800">NEWS</h1>
+		  </div>
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-black">검색 결과 : ${title }</h6>
-              	<div class="text-right">
+            <div class="card-header py-3">            
+              	<div class="news-header">
+              	    <h6 class="m-0 font-weight-bold text-black">검색 결과 : ${title }</h6>
 					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="../news/list.do" method="post">
 						<div class="input-group">
 							<input type="text" name="data" class="form-control bg-light border-0 small" placeholder="News Search.." aria-label="Search" aria-describedby="basic-addon2">
