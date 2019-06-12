@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -9,7 +9,6 @@
 .chart-content{
 	width: 450px;
 }
-
 .sidebar #custom_sidebarToggle {
     width: 2.5rem;
     height: 2.5rem;
@@ -29,7 +28,6 @@
     font-family: 'Font Awesome 5 Free';
     margin-right: .1rem;
 }
-
 #custom_sidebarToggle.changed2::after {
     font-weight: 900;
     content: '\f105';
@@ -39,11 +37,9 @@
 .sidebar-dark #custom_sidebarToggle {
     background-color: rgba(255,255,255,.2);
 }
-
 .sidebar-dark #custom_sidebarToggle::after {
     color: rgba(255,255,255,.5);
 }
-
 .mb-4{
 	margin-top: 18px;
 }
@@ -102,6 +98,7 @@ var i=0;
 var a=0;
 var b=0;
 var c=0;
+var d=0;
 $(function(){
 	
 	$('#custom_sidebarToggle').click(function(){
@@ -140,7 +137,6 @@ $(function(){
 			});
 			display = 1;
 		}
-
 		else {
 			$('#print_recommand').html("");
 			display = 0;
@@ -163,14 +159,16 @@ $(function(){
 			});
 			i = 1;
 		}
-
 		else {
 			$('#print_seouluniv').html("");
 			i = 0;
 		}
 	});
 	
-	$('.schoolrate_panel').click(function() {	
+
+
+	$('.schoolrate_panel').click(function() {
+
 		if (a == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -183,14 +181,14 @@ $(function(){
 			});
 			a = 1;
 		}
-
 		else {
 			$('#print_schoolrate').html("");
 			a = 0;
 		}
 	});
-	
-	$('.bu_detail_panel').click(function() {		
+
+	$('.bu_detail_panel').click(function() {
+
 		if (b == 0) {
 			$('.panel').hide();
 			$.ajax({
@@ -207,12 +205,12 @@ $(function(){
 			});
 			b = 1;
 		}
-
 		else {
 			$('#print_bu_detail').html("");
 			b = 0;
 		}
 	});
+
 	
 	$('.news_panel').click(function() {		
 		if (c == 0) {
@@ -258,6 +256,28 @@ function drawVisualization() {
     var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
     chart.draw(data, options);
 }
+
+	$('.schoolinfo_panel').click(function() {
+		if (d == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'schoolinfo.do',
+				success:function(res)
+				{
+					$('#print_schoolinfo').html(res);
+				}
+			});
+			d = 1;
+		}
+
+		else {
+			$('#print_schoolinfo').html("");
+			d = 0;
+		}
+   });
+});
+	
 </script>
 </head>
 <body>
@@ -335,6 +355,7 @@ function drawVisualization() {
       </div>
     </ul>
     
+
     <!-- 부동산 추천 -->
     <div id="print_recommand"></div>
     
@@ -346,6 +367,9 @@ function drawVisualization() {
     
     <!-- 부동산 디테일 -->
     <div id="print_bu_detail"></div>
+
+    <!-- 학교정보 디테일 -->
+    <div id="print_schoolinfo"></div>
     
     <!-- 뉴스 -->
     <div id="print_news"></div>
