@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import com.sist.vo.*;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ public class MainController {
 	private AptDAO aptdao; 
 	@Autowired 
 	private OfficeDAO offdao;
+	@Autowired
+	private SchoolDAO schdao;
 	
 	@RequestMapping("main/main.do")
 	public String main_main(){
@@ -28,7 +32,7 @@ public class MainController {
 	
 	@RequestMapping("main/select.do")
 	public String main_Test(Model model){	
-		List<OfficetelVO> list = offdao.OfficetestData("대전광역시 동구");
+		List<OfficetelVO> list = offdao.OfficetestData("");
 		
 		/*List<String> aptlist = new ArrayList<String>();
 		
@@ -65,4 +69,53 @@ public class MainController {
 		return "main/test";
 	}
 	
+	
+	@RequestMapping("main/menu.do")
+	public String main_menu(){
+		return "main";
+	}
+	
+	@RequestMapping("main/recommand.do")
+	public String main_recommand(){
+		return "main/recommand";
+	}
+	
+	@RequestMapping("main/seouluniv.do")
+	public String main_seouluniv(){
+		return "main/seouluniv";
+	}
+	
+	@RequestMapping("main/schoolrate.do")
+	public String main_schoolrate(){
+		return "main/schoolrate";
+	}
+	
+	@RequestMapping("main/schoolinfo.do")
+	public String main_schoolinfo(Model model){
+		
+		List<highSchool_GraduateVO> schlist=schdao.schoolAllData();
+		model.addAttribute("schlist",schlist);
+		
+		List<highSchool_SeoulVO> seoullist=schdao.seoulAllData();
+		model.addAttribute("seoullist",seoullist);
+		
+		highSchool_GraduateVO vo=schdao.schoolDetailData();
+		model.addAttribute("vo", vo);
+//		JSONArray arr=new JSONArray();
+//		for(highSchool_GraduateVO vo:schlist)
+//		{
+//			JSONObject obj=new JSONObject();
+//			obj.put("total", vo.getHIRED_TOTAL());
+//			
+//			arr.add(obj);
+//		}
+//		model.addAttribute("graduatedata", arr.toJSONString());
+		
+		return "main/schoolinfo";
+	}
+	
+	@RequestMapping("main/bu_detail.do")
+	public String main_bu_detail(){
+		return "main/bu_detail";
+	}
 }

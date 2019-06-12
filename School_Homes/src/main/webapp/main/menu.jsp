@@ -69,104 +69,200 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <script type="text/javascript">
-var index=true;
-
-
+var index=0;
+var display=0; //스위치 변수
+var i=0;
+var a=0;
+var b=0;
 $(function(){
-	
-	$('#print').hide();
-	$('#custom_sidebarToggle').click(function(){
-		if(index)
-		{
-			$('#print').show();
-			$('#custom_sidebarToggle').toggleClass('changed');		
-			index=false;
+   $('#custom_sidebarToggle').click(function(){
+      if(index == 0)
+      {
+         $('#custom_sidebarToggle').toggleClass('changed');
+         $.ajax({
+            type:'post',
+            url:'recommand.do',
+            success:function(res)
+            {
+               $('#print').html(res);
+            }
+         });
+         index=1;
+      }
+      
+      else
+      {
+         $('#print').hide();
+         $('#custom_sidebarToggle').toggleClass('changed2');
+         index=0;
+      }
+   });
+   
+   $('.recommand_panel').click(function() {
+
+      if (display == 0) {
+         $('.panel').hide();
+         $.ajax({
+            type:'post',
+            url:'recommand.do',
+            success:function(res)
+            {
+               $('#print_recommand').html(res);
+            }
+         });
+         display = 1;
+      }
+
+      else {
+         $('#print_recommand').html("");
+         display = 0;
+      }
+   });
+   
+   $('.seouluniv_panel').click(function() {
+      if (i == 0) {
+         $('.panel').hide();
+         $.ajax({
+            type:'post',
+            url:'seouluniv.do',
+            success:function(res)
+            {
+               $('#print_seouluniv').html(res);
+            }
+         });
+         i = 1;
+      }
+
+      else {
+         $('#print_seouluniv').html("");
+         i = 0;
+      }
+   });
+   
+   $('.schoolrate_panel').click(function() {
+
+      if (a == 0) {
+         $('.panel').hide();
+         $.ajax({
+            type:'post',
+            url:'schoolrate.do',
+            success:function(res)
+            {
+               $('#print_schoolrate').html(res);
+            }
+         });
+         a = 1;
+      }
+
+      else {
+         $('#print_schoolrate').html("");
+         a = 0;
+      }
+   });
+   
+   $('.schoolinfo_panel').click(function() {
+		if (b == 0) {
+			$('.panel').hide();
+			$.ajax({
+				type:'post',
+				url:'schoolinfo.do',
+				success:function(res)
+				{
+					$('#print_schoolinfo').html(res);
+				}
+			});
+			b = 1;
 		}
-		
-		else 
-		{
-			$('#print').hide();
-			$('#custom_sidebarToggle').toggleClass('changed2');
-			index=true;
+
+		else {
+			$('#print_schoolinfo').html("");
+			b = 0;
 		}
-		
 	});
 });
-</script>
-</head>
-<body>
-<!-- Sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+	</script>
 
-      <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-        <div class="sidebar-brand-icon rotate-n-15">
-          <!-- <i class="fas fa-laugh-wink"></i> -->
-        </div>
-        <div class="sidebar-brand-text mx-3">School∩Homes</div>
-      </a>
+	</head>
+	<body>
+	<!-- Sidebar -->
+	    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-      <!-- Divider -->
-      <hr class="sidebar-divider my-0">
-      
-      <!-- Heading -->
-      <!-- <div class="sidebar-heading">
-        Addons
-      </div> -->
+	      <!-- Sidebar - Brand -->
+	      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+	        <div class="sidebar-brand-icon rotate-n-15">
+	          <!-- <i class="fas fa-laugh-wink"></i> -->
+	        </div>
+	        <div class="sidebar-brand-text mx-3">School∩Homes</div>
+	      </a>
 
-      <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-fw fa-folder"></i>
-          <span>학교랭킹</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <!-- <h6 class="collapse-header">Login Screens:</h6> -->
-            <a class="collapse-item" href="login.html">서울대 입결</a>
-            <a class="collapse-item" href="register.html">진학률</a>
-          </div>
-        </div>
-      </li>
+	      <!-- Divider -->
+	      <hr class="sidebar-divider my-0">
+	      
+	      <!-- Heading -->
+	      <!-- <div class="sidebar-heading">
+	        Addons
+	      </div> -->
 
-      <!-- Nav Item - Charts -->
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>분석</span></a>
-      </li>
-      
-      <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>추천</span></a>
-      </li>
+	      <!-- Nav Item - Pages Collapse Menu -->
+	      <li class="nav-item">
+	        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+	          <i class="fas fa-fw fa-folder"></i>
+	          <span>학교랭킹</span>
+	        </a>
+	        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+	          <div class="bg-white py-2 collapse-inner rounded">
+	            <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+	            <a class="collapse-item seouluniv_panel">서울대 입결</a>
+	            <a class="collapse-item schoolrate_panel">진학률</a>
+	            <a class="collapse-item schoolinfo_panel">학교 정보</a>
+	          </div>
+	        </div>
+	      </li>
 
-      <!-- Nav Item - Tables -->
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>게시판</span></a>
-      </li>
-      
-       <li class="nav-item">
-        <a class="nav-link" href="../main/select.do">
-          <i class="fas fa-fw fa-table"></i>
-          <span>테스트</span></a>
-      </li>
+	      <!-- Nav Item - Charts -->
+	      <li class="nav-item">
+	        <a class="nav-link" href="charts.html">
+	          <i class="fas fa-fw fa-chart-area"></i>
+	          <span>분석</span></a>
+	      </li>
+	      
+	      <li class="nav-item">
+	        <a class="nav-link recommand_panel">
+	          <i class="fas fa-fw fa-chart-area"></i>
+	          <span>추천</span></a>
+	      </li>
 
-      <!-- Divider -->
-      <hr class="sidebar-divider d-none d-md-block">
+	      <!-- Nav Item - Tables -->
+	      <li class="nav-item">
+	        <a class="nav-link" href="tables.html">
+	          <i class="fas fa-fw fa-table"></i>
+	          <span>게시판</span></a>
+	      </li>
+		<li class="nav-item"><a class="nav-link" href="../main/select.do">
+				<i class="fas fa-fw fa-table"></i> <span>테스트</span>
+		</a></li>
 
-      <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="custom_sidebarToggle"></button>
-      </div>
-    </ul>
-    
-    <div class="chart-content" id="print" >
-      Ajax TEST
-    </div>
-    <!-- End of Sidebar -->
-</body>
-</html>
+		<!-- Divider -->
+	      <hr class="sidebar-divider d-none d-md-block">
+
+	      <!-- Sidebar Toggler (Sidebar) -->
+	      <div class="text-center d-none d-md-inline">
+	        <button class="rounded-circle border-0" id="custom_sidebarToggle"></button>
+	      </div>
+	    </ul>
+	    
+	    <!-- recommand -->
+	    <div id="print_recommand"></div>
+	    
+	    <!-- seouluniv -->
+	    <div id="print_seouluniv"></div>
+	    
+	    <!-- schoolrate -->
+	    <div id="print_schoolrate"></div>
+	    
+	    <!-- schoolinfo -->
+	    <div id="print_schoolinfo"></div>
+	    
+	    <!-- End of Sidebar -->
+	</body>
+	</html>
