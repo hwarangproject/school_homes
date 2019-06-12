@@ -42,6 +42,7 @@ public class MainController {
 		return "main/recommand";
 	}
 
+
 		@RequestMapping("main/bu_detail.do")
 		public String main_bu_detail(){
 			return "main/bu_detail";
@@ -177,4 +178,5 @@ public class MainController {
 	public String main_bu_detail(){
 		return "main/bu_detail";
 	}
+
 }
