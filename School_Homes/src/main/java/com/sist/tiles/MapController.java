@@ -17,19 +17,20 @@ import com.sist.vo.OfficetelVO;
 public class MapController {
 	@Autowired
 	private OfficeDAO offdao;
+
 	
 	@RequestMapping("main/select.do")
 	public String main_Test(Model model) {
 	
 
-		List<OfficetelVO> list = offdao.OfficetestData("ì„œìš¸íŠ¹ë³„ì‹œ ê°•ë‚¨êµ¬ ë„ê³¡ë™");
+		List<OfficetelVO> list = offdao.OfficetestData("¼­¿ïÆ¯º°½Ã °­³²±¸ µµ°îµ¿");
 		List<OfficetelVO> off_list = new ArrayList<OfficetelVO>();
 		System.out.println("list.size:"+list.size());
 		int i=0;
 		for (OfficetelVO vo : list) {
 			
 			try{
-			// ì£¼ì†Œ 
+			// ÁÖ¼Ò 
 			String temp = "";
 			if (!vo.getNUMBER_SUB().equals("0")) {
 				temp = vo.getNUMBER_SUB() + " ";
@@ -38,7 +39,7 @@ public class MapController {
 			
 			String off_name="";
 			OfficetelVO detailvo = new OfficetelVO();
-			if(vo.getBuilding_NAME().contains("\"") || vo.getBuilding_NAME().contains("(")) // ì´ë¦„ì— "(ã…ã…ã…)" í˜•ì‹ì¼ë•Œ
+			if(vo.getBuilding_NAME().contains("\"") || vo.getBuilding_NAME().contains("(")) // ÀÌ¸§¿¡ "(¤±¤±¤±)" Çü½ÄÀÏ¶§
 				{
 					off_name=vo.getBuilding_NAME().replace("\"", "").trim();
 					detailvo = offdao.officedetailData(off_name,vo.getADDR(),0);
@@ -50,7 +51,7 @@ public class MapController {
 				detailvo = offdao.officedetailData(off_name,vo.getADDR(),1);
 			}
 			
-			System.out.println(i+"ë²ˆ:"+off_name);
+			System.out.println(i+"¹ø:"+off_name);
 			//System.out.println("test:" + detailvo.getOFF_FOUND_YEAR());
 
 			detailvo.setADDR(s);

@@ -53,7 +53,7 @@
 			 var myAddress = request.getParameter("aptlist");
 		 */
 			
-		var schooladdress= '인천광역시 계양구 주부토로 588"';
+		var schooladdress= '서울특별시 강남구 개포로 402';
 		
 		var myAddress = $.parseJSON('<%=request.getAttribute("json")%>');
 		alert(myAddress.length);

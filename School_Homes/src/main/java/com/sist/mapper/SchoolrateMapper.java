@@ -11,7 +11,6 @@ public interface SchoolrateMapper {
 	public List<SchoolrateVO> SchoolrateAllData();
 	
 	// 학교 주소 가져오기
-@Select("SELECT * FROM highinfo_basic WHERE schoolno = #{schoolno}")
-@Select("SELECT * FROM highinfo_basic WHERE schoolno=#{schoolno}")
-public BasicVO schoolbasic_info(String schoolno);
+	@Select("SELECT * FROM highinfo_basic WHERE schoolno = #{schoolno}")
+	public BasicVO schoolbasic_info(String schoolno);
 }
