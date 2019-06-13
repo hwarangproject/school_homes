@@ -38,12 +38,6 @@ public class MainController {
 		return "main";
 	}
 	
-	@RequestMapping("main/recommand.do")
-	public String main_recommand(){
-		return "main/recommand";
-	}
-	
-	
 	@RequestMapping("main/schoolinfo.do")
 	public String main_schoolinfo(Model model){
 		

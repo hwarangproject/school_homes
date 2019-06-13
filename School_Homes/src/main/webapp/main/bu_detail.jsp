@@ -63,6 +63,8 @@
 </style>
 </head>
 <body>
+
+
   <!-- recommend -->
 	<div class="chart-content panel" id="print_bu_detail">
 		<div class="card-header">부동산 종합정보</div>

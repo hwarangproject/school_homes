@@ -9,5 +9,9 @@ import com.sist.mapper.RecommandMapper;
 public class RecommandDAO {
 	@Autowired
 	private RecommandMapper mapper;
+	
+	public ArrayList<String> getDongList(){
+		return mapper.getDongList();
+	}
 
 }

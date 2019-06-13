@@ -3,9 +3,13 @@
 <!DOCTYPE html PUBLIC>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script type="text/javascript">
 function ShowSliderValue(sVal)
 {
@@ -13,7 +17,7 @@ function ShowSliderValue(sVal)
 	obValueView.innerHTML = sVal
 }
 
-var RangeSlider = function(){
+    var RangeSlider = function(){
 	var range = $('.slider_range');
     
 	range.on('input', function(){		
@@ -22,6 +26,29 @@ var RangeSlider = function(){
 };
 
 RangeSlider();
+
+$(function(){
+/* 	$('#keyword').keyup(function(){
+		var k=$('#keyword').val();
+		$('#user_table>tbody>tr').hide();
+		var temp=$('#user_table>tbody>tr>td:nth-child(4n+2):contains("'+k+'")');
+		$(temp).parent().show();
+	}); */
+	 var availableCity = <%= request.getAttribute("list")%>;
+
+	    $("#keyword").autocomplete({	    	
+	        source: availableCity,
+	        select: function(event, ui) {
+	            console.log(ui.item);
+	        },
+
+	        focus: function(event, ui) {
+	            return false;
+	            //event.preventDefault();
+	        }
+	    });
+	    // $('.h5').text();
+});
 
 </script>
 </head>
@@ -48,13 +75,14 @@ RangeSlider();
 					<div class="h5 mb-0 font-weight-bold text-gray-800">지역</div>
 					<p class="mb-4">선택한 지역을 기준으로 추천해 드립니다</p>
 					<div class="input-group">
-		              <input type="text" class="form-control bg-light border-0 small" placeholder="동을 입력하세요">
+		              <input type="text" id="keyword" class="form-control bg-light border-0 small" placeholder="동을 입력하세요" autocomplete="on">
 		              <div class="input-group-append">
 		                <button class="btn btn-gray" type="button">
 		                  <i class="fas fa-search fa-sm"></i>
 		                </button>
 		              </div>
 		            </div>
+
 				</div>
 			</div>
 			<div class="card -mb4">
