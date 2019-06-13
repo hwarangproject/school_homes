@@ -1,10 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+function ShowSliderValue(sVal)
+{
+	var obValueView = document.getElementById("slider_value_view");
+	obValueView.innerHTML = sVal
+}
+
+var RangeSlider = function(){
+	var range = $('.slider_range');
+    
+	range.on('input', function(){		
+		ShowSliderValue(this.value);
+	});
+};
+
+RangeSlider();
+
+</script>
 </head>
 <body>
   <!-- recommend -->
@@ -19,7 +38,8 @@
 			<div class="card -mb4">
 				<div class="card-body">
 					<div class="h5 mb-0 font-weight-bold text-gray-800">최대 예산</div>
-					<input id="slider" type="range" min="100" max="500" step="10">
+					<input class="slider_range" id="slider" value="0" type="range" min="5000000" max="8100000000" step="100">
+					<font size=2 id="slider_value_view">0</font>
 				</div>
 				
 			</div>
