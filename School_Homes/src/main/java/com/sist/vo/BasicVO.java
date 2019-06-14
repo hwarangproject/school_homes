@@ -8,6 +8,7 @@ import lombok.Setter;
 public class BasicVO {
 	private String sidoedu;
 	private String localedu;
+	private String llocal; 
 	private String schoolno;
 	private String schoolname;
 	private String schoolcode;

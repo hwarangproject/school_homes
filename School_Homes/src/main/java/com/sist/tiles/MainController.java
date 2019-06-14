@@ -14,8 +14,7 @@ import com.sist.dao.*;
 
 @Controller
 public class MainController {
-	@Autowired
-	private AptDAO aptdao;
+	
 	@Autowired
 	private OfficeDAO offdao;
 
@@ -24,11 +23,6 @@ public class MainController {
 	
 	@RequestMapping("main/main.do")
 	public String main_main() {
-
-		List<AptVO> list = aptdao.aptAllData();
-		System.out.println(list.size());
-		System.out.println(list.get(0).getAPT_NAME());
-
 		return "main";
 	}
 	

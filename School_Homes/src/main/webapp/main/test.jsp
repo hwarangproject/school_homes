@@ -22,15 +22,20 @@
     .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
     .info .link {color: #5085BB;}
 </style>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+
+</script>
 </head>
 <body>
-
+	
 	<div id="map" style="width: 100%; height: 980px;"></div>
-
+	
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=401147ea060ab849ab02edb7408de18e&libraries=services"></script>
 	<script>
+	
+	
 	
 	
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -42,6 +47,20 @@
 
 		// 지도를 생성합니다    
 		var map = new daum.maps.Map(mapContainer, mapOption);
+		
+		
+		var mapTypeControl = new daum.maps.MapTypeControl();
+
+		//----------지도 컨트롤 우측상단 -----
+		// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+		// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+		map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+
+		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+		var zoomControl = new daum.maps.ZoomControl();
+		map.addControl(zoomControl, daum.maps.ControlPosition.TOTRIGHT);
+		//-------------------------------------------------------------------------------
+		
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new daum.maps.services.Geocoder();
 
@@ -53,7 +72,7 @@
 			 var myAddress = request.getParameter("aptlist");
 		 */
 			
-		var schooladdress= '서울특별시 강남구 개포로 402';
+		var schooladdress= '${school_addr}';
 		
 		var myAddress = $.parseJSON('<%=request.getAttribute("json")%>');
 		alert(myAddress.length);
@@ -116,7 +135,7 @@
 										 content = '<div class="wrap">' + 
 								            '    <div class="info">' + 
 								            '        <div class="title">' + 
-								            '            ㅁㅁ고등학교'+  
+								            '            ${schoolname}'+  
 								            '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
 								            '        </div>' + 
 								            '        <div class="body">' + 
@@ -126,7 +145,9 @@
 								            '            <div class="desc">' + 
 								            '                <div class="ellipsis">대전광역시 동구 신기로 71</div>' + 
 								            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-								            '                <div><a href="http://www.kakaocorp.com/main" target="_blank" class="link">상세보기</a></div>' + 
+								            /* '                <div><a href="#" class="schoolinfo_panel" value=${schoolno} target="_blank">상세보기</a></div>' +  */
+								            '                <div><input type="button" id="schoolinfo_panel" value="상세보기" onclick =detail(); ></div>' + 
+								            '                <div><input type="hidden" id="schoolinfo_no" value=${schoolno} ></div>' + 
 								            '            </div>' + 
 								            '        </div>' + 
 								            '    </div>' +    
@@ -175,6 +196,33 @@
 		    overlay[number].setMap(null);     
 		}
 		
+		function detail(){
+	         //$('#schoolinfo_print').hide();
+	      
+	               var schoolno = $('#schoolinfo_no').val();
+	                //var schoolno=$(this).attr("value");
+	               alert(schoolno);
+	                  $.ajax({
+	                     type:'post',
+	                     url:'schoolinfo.do',
+	                     data : {"schoolno": schoolno},
+	                     success:function(res)
+	                     {
+	                       
+	                       
+	                           
+	                        $('#print_recommand').hide();  
+	                        $('#print_seouluniv').hide();  
+	                        $('#print_schoolrate').hide();  
+	                        $('#print_bu_detail').hide();  
+	                        $('#print_schoolinfo').hide();  
+	                           
+	                      $('#schoolinfo_print').show();
+	                        $('#schoolinfo_print').html(res);
+	                     }
+	                  });
+	            
+	      }
 	
 
 		

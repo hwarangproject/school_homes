@@ -13,10 +13,10 @@ public class NewsController {
 	@Autowired
 	private NewsManager mgr;
 
-	@RequestMapping("main/news.do")
+	@RequestMapping("news/list.do")
 	public String newsAllData(String data, Model model) {
 		if (data == null)
-			data = "∫ŒµøªÍ";
+			data = "Î∂ÄÎèôÏÇ∞";
 		List<Item> list = mgr.newsAllData(data);
 
 		for (Item i : list) {
@@ -25,6 +25,6 @@ public class NewsController {
 	
 		model.addAttribute("list", list);
 		model.addAttribute("title", data);
-		return "main/news";
+		return "news/list";
 	}
 }

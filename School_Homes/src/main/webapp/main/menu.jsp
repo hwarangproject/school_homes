@@ -62,34 +62,9 @@
 	color: #404040;
 }
 </style>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <!--   <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawVisualization);
-
-      function drawVisualization() {
-        // Some raw data (not necessarily accurate)
-        var data = google.visualization.arrayToDataTable([
-          ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-          ['2004/05',  165,      938,         522,             998,           450,      614.6],
-          ['2005/06',  135,      1120,        599,             1268,          288,      682],
-          ['2006/07',  157,      1167,        587,             807,           397,      623],
-          ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-          ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-        ]);
-
-        var options = {
-          title : 'Monthly Coffee Production by Country',
-          vAxis: {title: 'Cups'},
-          hAxis: {title: 'Month'},
-          seriesType: 'bars',
-          series: {5: {type: 'line'}}
-        };
-
-        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-        chart.draw(data, options);
-      }
-    </script> -->
+<script src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+<script src="https://www.amcharts.com/lib/3/pie.js"></script>
+<script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 var index=0;
@@ -97,17 +72,15 @@ var display=0; //스위치 변수
 var i=0;
 var a=0;
 var b=0;
-var c=0;
 var d=0;
 $(function(){
-	
 	$('#custom_sidebarToggle').click(function(){
 		if(index == 0)
 		{
 			$('#custom_sidebarToggle').toggleClass('changed');
 			$.ajax({
 				type:'post',
-				url:'recommand.do',
+				url:'../main/recommand.do',
 				success:function(res)
 				{
 					$('#print').html(res);
@@ -129,7 +102,7 @@ $(function(){
 			$('.panel').hide();
 			$.ajax({
 				type:'post',
-				url:'recommand.do',
+				url:'../main/recommand.do',
 				success:function(res)
 				{
 					$('#print_recommand').html(res);
@@ -144,17 +117,14 @@ $(function(){
 	});
 	
 	$('.seouluniv_panel').click(function() {
-		
 		if (i == 0) {
 			$('.panel').hide();
 			$.ajax({
 				type:'post',
-				url:'seouluniv.do',
+				url:'../main/seouluniv.do',
 				success:function(res)
 				{
-					
 					$('#print_seouluniv').html(res);
-					
 				}
 			});
 			i = 1;
@@ -165,15 +135,12 @@ $(function(){
 		}
 	});
 	
-
-
 	$('.schoolrate_panel').click(function() {
-
 		if (a == 0) {
 			$('.panel').hide();
 			$.ajax({
 				type:'post',
-				url:'schoolrate.do',
+				url:'../main/schoolrate.do',
 				success:function(res)
 				{
 					$('#print_schoolrate').html(res);
@@ -186,22 +153,17 @@ $(function(){
 			a = 0;
 		}
 	});
-
+	
 	$('.bu_detail_panel').click(function() {
-
 		if (b == 0) {
 			$('.panel').hide();
 			$.ajax({
 				type:'post',
-				url:'bu_detail.do',
+				url:'../main/bu_detail.do',
 				success:function(res)
 				{
-					
 					$('#print_bu_detail').html(res);
-					google.charts.load('current', {'packages':['corechart']});
-				    google.charts.setOnLoadCallback(drawVisualization);
-				    drawVisualization();
-				}   
+				}
 			});
 			b = 1;
 		}
@@ -211,33 +173,12 @@ $(function(){
 		}
 	});
 
-	
-	$('.news_panel').click(function() {		
-		if (c == 0) {
-			$('.panel').hide();
-			$.ajax({
-				type:'post',
-				url:'news.do',
-				success:function(res)
-				{
-					$('#print_news').html(res);
-				}   
-			});
-			c = 1;
-		}
-
-		else {
-			$('#print_news').html("");
-			c = 0;
-		}
-	});
-	
 	$('.schoolinfo_panel').click(function() {
 		if (d == 0) {
 			$('.panel').hide();
 			$.ajax({
 				type:'post',
-				url:'schoolinfo.do',
+				url:'../main/schoolinfo.do',
 				success:function(res)
 				{
 					$('#print_schoolinfo').html(res);
@@ -251,32 +192,7 @@ $(function(){
 			d = 0;
 		}
    });
-	
 });
-	
-function drawVisualization() {
-    // Some raw data (not necessarily accurate)
-    var data = google.visualization.arrayToDataTable([
-      ['Month', 'Bolivia', 'Ecuador', 'Madagascar', 'Papua New Guinea', 'Rwanda', 'Average'],
-      ['2004/05',  165,      938,         522,             998,           450,      614.6],
-      ['2005/06',  135,      1120,        599,             1268,          288,      682],
-      ['2006/07',  157,      1167,        587,             807,           397,      623],
-      ['2007/08',  139,      1110,        615,             968,           215,      609.4],
-      ['2008/09',  136,      691,         629,             1026,          366,      569.6]
-    ]);
-
-    var options = {
-      title : 'Monthly Coffee Production by Country',
-      vAxis: {title: 'Cups'},
-      hAxis: {title: 'Month'},
-      seriesType: 'bars',
-      series: {5: {type: 'line'}}
-    };
-
-    var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
-    chart.draw(data, options);
-    }
-
 	
 </script>
 </head>
@@ -303,11 +219,13 @@ function drawVisualization() {
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-          <i class="fas fa-school"></i>
+          <i class="fas fa-fw fa-folder"></i>
           <span>학교랭킹</span>
         </a>
         <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
+            <!-- <h6 class="collapse-header">Login Screens:</h6> -->
+            <a class="collapse-item schoolinfo_panel">학교 정보</a>
             <a class="collapse-item seouluniv_panel">서울대 입결</a>
             <a class="collapse-item schoolrate_panel">진학률</a>
           </div>
@@ -323,13 +241,13 @@ function drawVisualization() {
       
       <li class="nav-item">
         <a class="nav-link recommand_panel">
-          <i class="fas fa-thumbs-up"></i>
-          <span>추천</span></a>	
+          <i class="fas fa-fw fa-chart-area"></i>
+          <span>추천</span></a>
       </li>
 		<!-- News Table -->
 	  <li class="nav-item">
-        <a class="nav-link news_panel">
-          <i class="far fa-newspaper"></i>
+        <a class="nav-link" href="../news/list.do">
+          <i class="fas fa-fw fa-table"></i>
           <span>뉴스</span></a>
       </li>
 		
@@ -340,12 +258,12 @@ function drawVisualization() {
           <span>게시판</span></a>
       </li>
       
-       <li class="nav-item">
+      <!--  <li class="nav-item">
         <a class="nav-link" href="../main/select.do">
           <i class="fas fa-fw fa-table"></i>
           <span>테스트</span></a>
       </li>
-
+ -->
       <!-- Divider -->
       <hr class="sidebar-divider d-none d-md-block">
 
@@ -371,10 +289,7 @@ function drawVisualization() {
     <!-- 학교정보 디테일 -->
     <div id="print_schoolinfo"></div>
     
-    <!-- 뉴스 -->
-    <div id="print_news"></div>
-    
-    
+    <div id ="schoolinfo_print"></div>
     <!-- End of Sidebar -->
 </body>
 </html>

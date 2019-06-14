@@ -8,12 +8,12 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.sist.mapper.Aptmapper;
 import com.sist.mapper.Officemapper;
 import com.sist.vo.*;
 
 @Repository
 public class OfficeDAO {
+
 	@Autowired
 	private Officemapper officemapper;
 
