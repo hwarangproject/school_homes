@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.*;
 import com.sist.dao.RecommandDAO;
+import com.sist.vo.RecommandVO;
 
 @Controller
 public class RecommandController {
@@ -14,9 +15,15 @@ public class RecommandController {
 	private RecommandDAO rdao;
 	
 	@RequestMapping("main/recommand.do")
-	public String main_recommand(Model model){
-		ArrayList<String> dongList = rdao.getDongList();
+	public String main_recommand(RecommandVO vo, Model model){
 		
+		RecommandVO rvo = new RecommandVO();
+		rvo.setADDR(vo.getADDR());
+		rvo.setPRICE(vo.getPRICE());
+		rvo.setAREA(vo.getAREA());
+		
+		List<RecommandVO> rList = rdao.RecommandList(rvo);		
+		ArrayList<String> dongList = rdao.getDongList();	
 		
 		// jsonArray로 변환
 		JSONArray arr=new JSONArray();
@@ -25,7 +32,9 @@ public class RecommandController {
 			arr.add(dong);
 			System.out.println(dong);
 		}
+			
 		model.addAttribute("list", arr.toJSONString());
+		model.addAttribute("rList", rList);
 		return "main/recommand";
 	}
 	

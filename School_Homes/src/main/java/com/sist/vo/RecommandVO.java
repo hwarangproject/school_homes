@@ -15,7 +15,7 @@ BUILD_NO         NUMBER
 AREA             NUMBER         
 PRICE            NUMBER         
 CONTRACT_YM      NUMBER         
-FLOOR            NUMBE
+FLOOR            NUMBEr
  */
 @Setter
 @Getter
@@ -25,12 +25,12 @@ public class RecommandVO {
 	private String NUMBER_MAIN;
 	private String NUMBER_SUB; 
 	private String BUILDING_NAME;
-	private String AREA;
-	private String CONTRACT_YM; 
+	private int AREA;
+	private int CONTRACT_YM; 
 	private String CONTRACT_DATE;
-	private String PRICE;  
-	private String FLOOR; 
+	private int PRICE;  
+	private int FLOOR; 
 	private String FOUND_YEAR; 
 	private String ROAD_NAME;
-	private int NO;
+	private int BUILDING_NO;
 }
