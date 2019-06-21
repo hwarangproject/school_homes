@@ -2,18 +2,18 @@ package com.sist.news;
 
 import org.springframework.stereotype.Service;
 /*
- *     ¼ö¿äÀÏ ==> »ó¼¼º¸±â (Åë°è) => Trigger
- *     ¸ñ¿äÀÏ ==> webSocket => Index
- *     ±Ý¿äÀÏ ==> ÇÁ·ÎÁ§Æ® ¸¶¹«¸® => Spring ÃÑÁ¤¸® 
+ *     ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ==> ï¿½ó¼¼ºï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½) => Trigger
+ *     ï¿½ï¿½ï¿½ï¿½ï¿½ ==> webSocket => Index
+ *     ï¿½Ý¿ï¿½ï¿½ï¿½ ==> ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ => Spring ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
  *     
- *     ¿ù => React (webstorm)
+ *     ï¿½ï¿½ => React (webstorm)
  *     È­ => Node => mongodb
- *     ¼ö => Node <=> React (Router)
- *     ¸ñ => front => °£´ÜÇÑ »çÀÌÆ®
- *     ±Ý 
- *     ¿ù =>
- *     È­ => ¹èÆ÷ => webpack 
- *     ¼ö => Á¤¸® => ¼ö·á 
+ *     ï¿½ï¿½ => Node <=> React (Router)
+ *     ï¿½ï¿½ => front => ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®
+ *     ï¿½ï¿½ 
+ *     ï¿½ï¿½ =>
+ *     È­ => ï¿½ï¿½ï¿½ï¿½ => webpack 
+ *     ï¿½ï¿½ => ï¿½ï¿½ï¿½ï¿½ => ï¿½ï¿½ï¿½ï¿½ 
  */
 import java.util.*;
 
@@ -28,15 +28,11 @@ public class NewsManager {
     	List<Item> list=new ArrayList<Item>();
     	try
     	{
-    		// ÆÄ½Ì (XML,JSON=>µ¥ÀÌÅÍ¸¦ ÃßÃâ)
     		JAXBContext jc=JAXBContext.newInstance(Rss.class);
     		URL url=new URL("http://newssearch.naver.com/search.naver?where=rss&query="
     				       +URLEncoder.encode(data, "UTF-8"));
     		Unmarshaller un=jc.createUnmarshaller();
-    		/*
-    		 *   Unmarshaller : XML => javaÅ¬·¡½º
-    		 *   Marshaller : javaÅ¬·¡½º => XML
-    		 */
+
     		Rss rss=(Rss)un.unmarshal(url);
     		list=rss.getChannel().getItem();
     	}catch(Exception ex){}

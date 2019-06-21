@@ -9,25 +9,25 @@
 
 /* 파이차트 */
 #chartdiv {
-	width		: 100%;
-	height		: 300px;
-	font-size	: 11px;
+   width      : 100%;
+   height      : 400px;
+   font-size   : 12px;
 }
 
 /* =============== */
-html, body {height: 100%;}
+/*html, body {height: 100%;}*/
 
 .container {
   display: grid;
   grid-gap: 5px;
   
   grid-template-columns: 20% 30% 30% 20%;
-  grid-template-rows: 70px 400px 200px 200px 300px 100px ; 
+  grid-template-rows: 50px 400px 180px 180px 20px 20px ; 
 }
 
 .item {
-  border: 2px solid transparent;/*transparent; grey; */
-  font-size: 17px;
+  border: 0.5px solid grey;/*transparent; grey; */
+  /* font-size: 17px; */
   text-align: center;
 }
 .item-aa{
@@ -44,106 +44,125 @@ html, body {height: 100%;}
 }
 .item-c {
   grid-column-start: 1;
-  grid-column-end: 5;
+  grid-column-end: 5; /*5 */
   grid-row-start: 1.5;
-  grid-row-end: 2.5;  
+  grid-row-end: 2.0;  /*2.5*/
 }
 
 .item-d {
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 1.5;
-  grid-row-end: 2.5;
+  grid-row-start: 1.0;
+  grid-row-end: 2.0;
 }
 
 .item-e {
   grid-column-start: 3;
   grid-column-end: 5;
-  grid-row-start: 2.5;
-  grid-row-end: 3.5;
+  grid-row-start: 1.0;
+  grid-row-end: 2.0;
 }
 .item-z {
   grid-column-start: 3;
   grid-column-end: 5;
-  grid-row-start: 3.5;
-  grid-row-end: 4.5;
+  grid-row-start: 2.0;
+  grid-row-end: 3.0;
 }
 .item-i {
   grid-column-start: 1;
   grid-column-end: 3;
-  grid-row-start: 3.5;
-  grid-row-end: 5;
+  grid-row-start: 2.0;
+  grid-row-end: 3.0;
 }
-.item-zz {
+/* .item-zz {
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 5;
   grid-row-end: 6.5;
+} */
+
+/*소제목*/
+#sub{
+font-weight: 600;
+font-size: 17px;
 }
 
+/*소내용*/
+#con{
+font-weight: 500;
+font-size: 15px;
+}
 </style>
 <title>Insert title here</title>
-
 <script type="text/javascript">
 var chart = AmCharts.makeChart( "chartdiv", {
-	  "type": "pie",
-	  "theme": "light",
-	  "dataProvider": [{"total":${vo.COLLEGE_TOTAL},"cate":"대학 진학자 수"},{"total":${vo.HIRED_TOTAL},"cate":"취업자 수"},{"total":${vo.OTHER_TOTAL},"cate":"기타"}],
-	  "valueField": "total",
-	  "titleField": "cate",
-	   "balloon":{
-	   "fixedPosition":true
-	  },
-	  "export": {
-	    "enabled": true
-	  }
-	} );
+     "type": "pie",
+     "theme": "light",
+     "dataProvider": [{"total":${schoolvo.COLLEGE_TOTAL},"cate":"대학 진학자 수"},{"total":${schoolvo.HIRED_TOTAL},"cate":"취업자 수"},{"total":${schoolvo.OTHER_TOTAL},"cate":"기타"}],
+     "valueField": "total",
+     "titleField": "cate",
+      "balloon":{
+      "fixedPosition":true
+     },
+     "export": {
+       "enabled": true
+     }
+   } );
 </script>
 </head>
 <body>
   <!-- school rate  -->
   <div class="chart-content panel" id="print_schoolinfo">
     <div class="card-header">학교정보</div><br>
-     <c:forEach var="vo" items="${schlist }" varStatus="i">
-      <div class="container">
-        <div class="item item-f">${vo.SCHOOLNAME } &nbsp;${seoullist[0].SCHOOL_RANK }위(상위 ${seoullist[0].SCHOOL_RANGE } )</div>
+     <div class="card -mb4"> 
+     <div class="container">      
+        <div class="item item-f" style="font-weight:500;color:#5a5c69;font-size: 30px;">${seoulvo.SCHOOL_RANK }위&nbsp;&nbsp;&nbsp;${schoolvo.SCHOOLNAME }</div>
         <div class="item item-c">
-                    총 졸업생 ${vo.GRADUATE_TOTAL }명<br>
-          <div id="chartdiv"></div>
+                    총 졸업생 ${schoolvo.GRADUATE_TOTAL }명 (남 ${schoolvo.GRADUATE_MALE } 여 ${schoolvo.GRADUATE_FEMALE })<br>
+          <div id="chartdiv">         
+            <!-- 차트 출력 부분 -->
+           </div>
         </div>
         
- 		<div class="item item-d">졸업생 수<br>
- 		  남자:${vo.GRADUATE_MALE }명<br>
- 		  여자:${vo.GRADUATE_FEMALE }명 <br>
- 		   총  :${vo.GRADUATE_TOTAL }명 <br>
- 		</div>
- 		<div class="item item-e">대학교 진학 학생 수<br>
- 		  남자:${vo.COLLEGE_MALE }명<br>
- 		  여자:${vo.COLLEGE_FEMALE }명<br>
- 		   총  :${vo.COLLEGE_TOTAL }명<br>
- 		  대학교 진학률:${vo.COLLEGE_TOTAL_RATIO }%
- 		</div>
- 		<div class="item item-i">취업자 현황<br>
- 		 남자:${vo.HIRED_MALE }명<br>
- 		 여자:${vo.HIRED_FEMALE }명<br>
- 		 총 취업자:${vo.HIRED_TOTAL }명<br>
- 		 총 취업률:${vo.HIRED_TOTAL_RATIO }%
- 		</div>
-  		<div class="item item-z">기타<br>
-  		남자:${vo.OTHER_MALE }명<br>
-  		여자:${vo.OTHER_FEMALE }명<br>
-  		총:${vo.OTHER_TOTAL }명<br>
-  		기타 비율:${vo.OTHER_TOTAL_RATIO }%
-  		</div>
-  		
-  		
-  		<div class="item item-zz">서울대 입학생 수<br>
-  		수시:${seoullist[0].ADMISSION_EARLY }명<br>
-  		정시:${seoullist[0].ADMISSION_REGULAR }명<br>
-  		총:${seoullist[0].ADMISSION_TOTAL }명<br>
-  		</div>
+       <div class="item item-d" >
+       <font color="#5a5c69" id="sub">서울대 입학생 수</font><br>
+         <font id="con">수시:${seoulvo.ADMISSION_EARLY }명</font><br>
+         <font id="con">정시:${seoulvo.ADMISSION_REGULAR }명</font><br>
+          <font id="con">총:${seoulvo.ADMISSION_TOTAL }명</font><br>
+       </div>
+       
+       <div class="item item-e">
+       <font color="#5a5c69" id="sub">대학교 진학 학생 수</font><br>
+         <font id="con">남자 ${schoolvo.COLLEGE_MALE }명</font><br>
+         <font id="con">여자 ${schoolvo.COLLEGE_FEMALE }명</font><br>
+          <font id="con">총   ${schoolvo.COLLEGE_TOTAL }명</font><br>
+         <font id="con">대학교 진학률:${schoolvo   .COLLEGE_TOTAL_RATIO }%</font>
+       </div>
+       
+       <div class="item item-i">
+       <font color="#5a5c69" id="sub">취업자 현황</font><br>
+        <font id="con">남자:${schoolvo.HIRED_MALE }명</font><br>
+        <font id="con">여자:${schoolvo.HIRED_FEMALE }명</font><br>
+        <font id="con">총 취업자:${schoolvo.HIRED_TOTAL }명</font><br>
+        <font id="con">총 취업률:${schoolvo.HIRED_TOTAL_RATIO }%</font>
+       </div>
+       
+        <div class="item item-z">
+        <font color="#5a5c69" id="sub">기타</font><br>
+        <font id="con">남자:${schoolvo.OTHER_MALE }명</font><br>
+        <font id="con">여자:${schoolvo.OTHER_FEMALE }명</font><br>
+        <font id="con">총:${schoolvo.OTHER_TOTAL }명</font><br>
+        <font id="con">기타 비율:${schoolvo.OTHER_TOTAL_RATIO }%</font>
+        </div>   
+        
+         <!-- <div class="item item-zz">
+         <font color="#5a5c69" id="sub"></font><br>
+        <font id="con"></font><br>
+        <font id="con"></font><br>
+        <font id="con"></font><br>
+        </div> -->
       </div>
-     </c:forEach>
+      </div>
      
   </div>
 </body>

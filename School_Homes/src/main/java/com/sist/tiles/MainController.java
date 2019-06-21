@@ -14,10 +14,10 @@ import com.sist.dao.*;
 
 @Controller
 public class MainController {
-	
 	@Autowired
 	private OfficeDAO offdao;
-
+	@Autowired
+	private FindDAO fdao;
 	@Autowired
 	private SchoolDAO schdao;
 	
@@ -32,39 +32,20 @@ public class MainController {
 		return "main";
 	}
 	
-	@RequestMapping("main/recommand.do")
-	public String main_recommand(){
-		return "main/recommand";
-	}
 	
-	
-	@RequestMapping("main/schoolinfo.do")
-	public String main_schoolinfo(Model model){
+	@RequestMapping("main/search.do")
+	public String main_search(String key, Model model){
+		List<BasicVO> flist=fdao.highSchool_find(key);
+		int fcount=fdao.highSchool_count(key);
 		
-		List<highSchool_GraduateVO> schlist=schdao.schoolAllData();
-		model.addAttribute("schlist",schlist);
+		model.addAttribute("fcount", fcount);
+		model.addAttribute("flist", flist);
 		
-		List<highSchool_SeoulVO> seoullist=schdao.seoulAllData();
-		model.addAttribute("seoullist",seoullist);
-		
-		highSchool_GraduateVO vo=schdao.schoolDetailData();
-		model.addAttribute("vo", vo);
-//		JSONArray arr=new JSONArray();
-//		for(highSchool_GraduateVO vo:schlist)
-//		{
-//			JSONObject obj=new JSONObject();
-//			obj.put("total", vo.getHIRED_TOTAL());
-//			
-//			arr.add(obj);
-//		}
-//		model.addAttribute("graduatedata", arr.toJSONString());
-		
-		return "main/schoolinfo";
-	}
-	
-	@RequestMapping("main/bu_detail.do")
-	public String main_bu_detail(){
-		return "main/bu_detail";
+		return "main/search";
 	}
 
+	@RequestMapping("main/chat.do")
+	public String main_chat(){
+		return "main/chat";
+	}
 }

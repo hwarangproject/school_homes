@@ -19,16 +19,14 @@ public class MapController {
 	private OfficeDAO offdao;
 	
 	@RequestMapping("main/select.do")
-	public String main_Test(String addr, String addr_road, String schoolname,String schoolno ,Model model) {
+	public String main_Test(String llocal, String addr_road, String schoolname,String schoolno ,Model model) {
 	
+		System.out.println("llocal:"+llocal+"addr_road:"+addr_road+"schoolname:"+schoolname+"schoolno:"+schoolno);		
 		
-		//System.out.println("모델값 :"+addr.replace("\"", "").trim() + "aaaa");
-		String school_addr = addr_road.replace("\"", "").trim();
-		List<OfficetelVO> list = offdao.OfficetestData(addr.replace("\"", "").trim()); // 부동산 범위주소 ㅁㅁ시 ㅁㅁ구 ㅁㅁ동
+		String school_addr = addr_road;
+		List<OfficetelVO> list = offdao.OfficetestData(llocal.replace("\"", "").trim()); // 부동산 범위주소 ㅁㅁ시 ㅁㅁ구 ㅁㅁ동
 		List<OfficetelVO> off_list = new ArrayList<OfficetelVO>();
-		
-		System.out.println("list.size:"+list.size());
-		int i=0;
+
 		for (OfficetelVO vo : list) {
 			
 			try{
@@ -56,40 +54,48 @@ public class MapController {
 			//System.out.println(i+"번:"+off_name);
 			//System.out.println("test:" + detailvo.getOFF_FOUND_YEAR());
 
-			detailvo.setADDR(s);
-			detailvo.setBuilding_NAME(vo.getBuilding_NAME());
+			detailvo.setNUMBER1(s);
+			detailvo.setNUMBER_SUB(vo.getNUMBER_SUB());
+			detailvo.setNUMBER_MAIN(vo.getNUMBER_MAIN());
+			detailvo.setADDR(vo.getADDR());
+			detailvo.setBuilding_NAME(vo.getBuilding_NAME());	
 
 			off_list.add(detailvo);
+			
 			}catch(Exception ex)
 			{
 				ex.printStackTrace();
 			}
-			i++;
 		}
 
 		JSONArray arr = new JSONArray();
 		for (OfficetelVO vo : off_list) {
-			JSONObject obj = new JSONObject();
+			JSONObject obj = new JSONObject();		
 			obj.put("off_name", vo.getBuilding_NAME().replace("\"", "").trim());
-			obj.put("off_addr", vo.getADDR());
+			obj.put("off_addr", vo.getNUMBER1());
 			obj.put("off_found_year", vo.getFOUND_YEAR());
 			obj.put("off_price", vo.getPRICE());
 			obj.put("off_area", vo.getAREA());
+			obj.put("addr_main", vo.getNUMBER_MAIN());
+			obj.put("addr_sub", vo.getNUMBER_SUB());
+			obj.put("addr", vo.getADDR());
 			
-			//System.out.println( vo.getBuilding_NAME().replace("\"", "").trim());
-			//System.out.println(vo.getADDR());
-			//System.out.println(vo.getFOUND_YEAR());
-			//System.out.println(vo.getPRICE());
-			//System.out.println(vo.getAREA());
+//			System.out.println( vo.getBuilding_NAME().replace("\"", "").trim());
+//			System.out.println(vo.getADDR());
+//			System.out.println(vo.getFOUND_YEAR());
+//			System.out.println(vo.getPRICE());
+//			System.out.println(vo.getAREA());
 			arr.add(obj);
 		}
 
-		//System.out.println(off_list.size());
 		model.addAttribute("json", arr.toJSONString()); 
 		model.addAttribute("school_addr", school_addr);
+		model.addAttribute("llocal", llocal);
+		
+		// 마커에 학교이름 표시
 		model.addAttribute("schoolname", schoolname);
 		model.addAttribute("schoolno", schoolno);
-		return "main/test";
+		return "main/body";
 		
 		
 	}

@@ -6,11 +6,11 @@ import org.apache.ibatis.annotations.Select;
 
 import com.sist.vo.*;
 public interface SchoolrateMapper {
-// ÁøÇĞ·ü ¼øÀ§
+	// ì§„í•™ë¥  ìˆœìœ„
 	@Select("SELECT * FROM highinfo_graduate ORDER BY graduate_total DESC")
 	public List<SchoolrateVO> SchoolrateAllData();
 	
-	// ÇĞ±³ ÁÖ¼Ò °¡Á®¿À±â
-	@Select("SELECT * FROM highinfo_basic WHERE schoolno = #{schoolno}")
+	// í•™êµ ì£¼ì†Œ ê°€ì ¸ì˜¤ê¸°
+	@Select("SELECT * FROM highinfo_basic WHERE schoolno=#{schoolno}")
 	public BasicVO schoolbasic_info(String schoolno);
 }

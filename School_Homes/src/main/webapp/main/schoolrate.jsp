@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,14 +12,56 @@
 	display: inline-block;
 }
 .rank{
-text-align:center;
-vertical-align:middle; 
-display:flex; 
-align-items:center;
-width:100%;
+	text-align:center;
+	vertical-align:middle; 
+	display:flex; 
+	align-items:center;
+	width:100%;
 }
 
+#school_name {
+	margin: 0;
+	font-family: inherit;
+	font-size: 10px;
+	line-height: inherit
+}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+
+var schooldetail_arr = $.parseJSON('<%=request.getAttribute("highjson")%>');
+
+function school_click2(n) {
+   var school_no = schooldetail_arr[n].school_no;
+   var school_name = schooldetail_arr[n].school_name;
+   var addr_road = schooldetail_arr[n].addr_road;
+   var llocal = schooldetail_arr[n].llocal;
+   
+   $.ajax({
+      type : 'post',
+      url : 'select.do',
+      data : {
+         "schoolno" : school_no,
+         "schoolname" : school_name,
+         "addr_road" : addr_road,
+         "llocal" :llocal
+      },
+      success : function(res) {
+         $('.panel').hide();
+
+         $('#map').show();
+         $('#map').html(res);
+      }
+   });
+}
+
+function c_click(btn)
+{
+   school_click2(btn.name);
+}
+
+
+</script>
 </head>
 <body>
   <!-- school rate  -->
@@ -44,11 +87,19 @@ width:100%;
 								<td class="mb-0 text-gray-800 text-center" rowspan="2" width="50%" width="25%" height="75%"  align="center" valign="middle" 
 								style="font-size:13px; padding-top: 10px; padding-bottom: 5px; font-weight: bold">
 									<!-- 학교 상세정보로 이동 -->
-									<a href="#">${svo.schoolname }</a>	
+									<%-- <a href="../main/select.do?addr=
+										${fn:replace(blist[i.index].llocal,'\"','')}&addr_road=${fn:replace(blist[i.index].addr_road,'\"','')}
+										&schoolname=${svo.schoolname }&schoolno=${blist[i.index].schoolno}">${svo.schoolname }		
+									</a> --%>
+									<a onclick="location.href='../main/select.do?addr=
+										${fn:replace(blist[i.index].llocal,'\"','')}&addr_road=${fn:replace(blist[i.index].addr_road,'\"','')}
+										&schoolname=${svo.schoolname }&schoolno=${blist[i.index].schoolno}';" style="cursor: pointer">${svo.schoolname }</a>
+									
 								</td>
 								<td class="mb-0 text-gray-800 text-center" rowspan="3" width="25%" 
 								style="font-size:20px; padding-top: 20px" >
 									${svo.graduate_total }명
+									<input class="btn btn-xs btn-primary" type="button" id="school_name" name="${i.index }" value="상세보기" onclick=c_click(this);>
 								</td>
 							</tr>
 		
@@ -58,8 +109,7 @@ width:100%;
 					
 							<tr>						
 								<td class="mb-0 text-gray-800 text-center" style="font-size:10px">
-									<!-- 학교 주소로 이동(지도) -->
-									<a href="#">${blist[i.index].addr }</a>
+									${fn:replace(blist[i.index].addr,'\"','')}
 								</td>					
 							</tr>
 						</c:if>

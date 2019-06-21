@@ -11,9 +11,6 @@
 .news-title{
   margin-top: 18px;
 }
-
-
-
 </style>
 </head>
 <body>

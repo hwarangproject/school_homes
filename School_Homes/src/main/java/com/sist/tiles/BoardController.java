@@ -21,12 +21,12 @@ public class BoardController {
 	   
 	   model.addAttribute("list", list);
 	   
-	
+	  
 	   int totalpage=dao.boardTotalPage();
-	   // 寃뚯떆臾� 珥� 媛��닔
+	   
 	   int count=dao.boardRowCount();
 	   
-	   //  JSP濡� �쟾�넚 
+	  
 	   model.addAttribute("curpage", curpage);
 	   model.addAttribute("totalpage", totalpage);
 	   model.addAttribute("count", count);
@@ -46,9 +46,9 @@ public class BoardController {
    @RequestMapping("board/detail.do")
    public String board_detail(int no,Model model)
    {
-	   // 泥섎━ => MyBatis
+	  
 	   BoardVO vo=dao.boardDetailData(no);
-	   // JSP濡� �쟾�넚 
+	   
 	   model.addAttribute("vo", vo);
 	   return "board/detail";
    }
@@ -56,16 +56,16 @@ public class BoardController {
    @RequestMapping("board/update.do")
    public String board_update(int no,Model model)
    {
-	   // MyBatis泥섎━ 
+	   // 
 	   BoardVO vo=dao.boardUpdateData(no);
 	   model.addAttribute("vo", vo);
-	   return "board/update";// forward => request�쓽 媛믪쓣 �쑀吏��븯湲� �쐞�빐�꽌  
+	   return "board/update";// 
    }
    
    @RequestMapping("board/update_ok.do")
    public String board_update_ok(BoardVO vo,Model model)
    {
-	   // MyBatis泥섎━ 
+	   // 
 	   boolean bCheck=dao.boardUpdateOk(vo);
 	   System.out.println("bCheck:"+bCheck);
 	   model.addAttribute("bCheck", bCheck);

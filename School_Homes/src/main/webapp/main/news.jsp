@@ -11,10 +11,36 @@
 .news-title{
   margin-top: 18px;
 }
+
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+var q=0
+$(function(){
+	$('#news_search').click(function() {
+		if (q == 0) {
+			var n=$('#key').val();
+			$.ajax({
+				type:'post',
+				data:{"news_key":n},
+				url:'news.do',
+				success:function(res)
+				{
+					$('#print_newssearch').html(res);
+				}
+			});
+			q = 1;
+		}
+		else {
+			$('#print_newssearch').html("");
+			q = 0;
+		}
+	});
+});
+</script>
 </head>
 <body>
-  <div class="chart-content panel" id="print_news">
+  <div class="container-fluid">
           <!-- Page Heading -->
           <div class="news-title">
             <h1 class="h3 mb-2 text-gray-800">NEWS</h1>
@@ -24,12 +50,11 @@
             <div class="card-header py-3">            
               	<div class="news-header">
               	    <h6 class="m-0 font-weight-bold text-black">검색 결과 : ${title }</h6>
-					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="../news/list.do" method="post">
-						<div class="input-group">
-							<input type="text" name="data" class="form-control bg-light border-0 small" placeholder="News Search.." aria-label="Search" aria-describedby="basic-addon2">
-							<div class="input-group-append">
-								<button class="btn btn-primary">검색</button>
-							</div>
+					<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" action="news.do" method="post">
+						<div style="padding-left: 100px">
+							<input type="text" id="news_key" class="form-control bg-light border-0 small" 
+             				 placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+							<input type="button" class="btn btn-primary" id="news_search" value="검색">
 						</div>
 					</form>
 				</div>

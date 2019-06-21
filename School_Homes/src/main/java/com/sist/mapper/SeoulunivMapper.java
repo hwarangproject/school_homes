@@ -7,15 +7,15 @@ import org.apache.ibatis.annotations.Select;
 import com.sist.vo.*;
 
 public interface SeoulunivMapper {
-	// ¼­¿ï´ë ÀÔ°á ¼øÀ§
+	// ì„œìš¸ëŒ€ ì…ê²° ìˆœìœ„
 	@Select("SELECT * FROM highinfo_seouluniv ORDER BY school_rank")
 	public List<SeoulunivVO> SeoulunivAllData();
 	
-	// ³Î °ª Ã³¸®
-	@Select("SELECT count(*) FROM highinfo_basic WHERE schoolno = #{schoolno}")
-	public int schoolbasic_count(String schoolno); 
+	// ë„ ê°’ ì²˜ë¦¬
+	@Select("SELECT count(*) FROM highinfo_basic WHERE schoolno=#{schoolno}")
+	public int schoolbasic_count(String schoolno);
 	
-	// ÇĞ±³ ÁÖ¼Ò °¡Á®¿À±â
+	// í•™êµ ì£¼ì†Œ ê°€ì ¸ì˜¤ê¸°
 	@Select("SELECT * FROM highinfo_basic WHERE schoolno=#{schoolno}")
 	public BasicVO schoolbasic_info(String schoolno);
 }

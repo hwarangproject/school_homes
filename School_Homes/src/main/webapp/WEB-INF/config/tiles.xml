@@ -7,13 +7,13 @@
     <put-attribute name="menu" value="/main/menu.jsp"/>
     <put-attribute name="footer" value="/main/footer.jsp"/>
   </definition>
-  <definition name="news/list" extends="main">
-    <put-attribute name="body" value="/news/list.jsp"/>
-  </definition>
   <definition name="main/test" extends="main">
     <put-attribute name="body" value="/main/test.jsp"/>
   </definition>
   <definition name="board/*" extends="main">
     <put-attribute name="body" value="/board/{1}.jsp"/>
+  </definition>
+  <definition name="news/*" extends="main">
+	<put-attribute name="body" value="/news/{1}.jsp"/>
   </definition>
 </tiles-definitions>

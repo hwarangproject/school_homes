@@ -5,14 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-</head>
-<body>
-	<!-- <div class="container-fluid"> -->
-		<!-- Page Heading -->
-		<!-- <h1 class="h3 mb-4 text-gray-800">Blank Page</h1> -->
-		<!-- **** Welcome Maps Area Start **** -->
-		<style>
-.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+<style>
+.map_wrap, .map_wrap * {margin:0; padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:10px;}
 .map_wrap {position:relative;width:100%;height:900px;}
 #category {position:absolute;bottom:10px;right:10px;border-radius: 5px; border:1px solid #909090;box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4);background: #fff;overflow: hidden;z-index: 2;}
 #category li {float:left;list-style: none;width:50px;px;border-right:1px solid #acacac;padding:6px 0;text-align: center; cursor: pointer;}
@@ -38,12 +32,32 @@
 .placeinfo .title {font-weight: bold; font-size:14px;border-radius: 6px 6px 0 0;margin: -1px -1px 0 -1px;padding:10px; color: #fff;background: #d95050;background: #d95050 url(http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 .placeinfo .tel {color:#0f7833;}
 .placeinfo .jibun {color:#999;font-size:11px;margin-top:0;}
+.wrap {position: absolute;left: 0;bottom: 45px;width: 165px;height: 70px;margin-left: -83px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+.wrap * {padding: 0;margin: 0;}
+.wrap .info {width: 165px;height: 60px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+.info .title {padding-right: 10px; padding-bottom: 20px; height: 20px;background: #eee;border-bottom: 1px solid #ddd;font-size: 12px;font-weight: bold;}
+.info .close {position: absolute;top: 5px;right: 10px;color: #888;width: 10px;height: 10px;background: url('../main/img/overlay_close.png');}
+.info .close:hover {cursor: pointer;}
+.info .body {position: relative;overflow: hidden;}
+.info .desc {position: relative;margin: 2px 0 0 45px;height: 50px;}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+.info .img {position: absolute;top: 6px;left: 5px;width: 30px;height: 30px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+.info .link {color: #5085BB;}
 </style>
 </head>
 <body>
+	<!-- <div class="container-fluid"> -->
+		<!-- Page Heading -->
+		<!-- <h1 class="h3 mb-4 text-gray-800">Blank Page</h1> -->
+		<!-- **** Welcome Maps Area Start **** -->
+
+
 <div class="map_wrap">
     <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-    <ul id="category">
+   <!--  <ul id="category">
         <li id="BK9" data-order="0"> 
             <span class="category_bg bank"></span>
             은행
@@ -68,28 +82,29 @@
             <span class="category_bg store"></span>
             편의점
         </li>      
-    </ul>
+    </ul> -->
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38d1dc86015eedb6d87d13cbc38c372a&libraries=services"></script>
+<script type="text/javascript"
+      src="//dapi.kakao.com/v2/maps/sdk.js?appkey=38d1dc86015eedb6d87d13cbc38c372a&libraries=services"></script>
 <script>
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
-var placeOverlay = new daum.maps.CustomOverlay({zIndex:1}), 
+/* var placeOverlay = new daum.maps.CustomOverlay({zIndex:1}), 
     contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
     markers = [], // 마커를 담을 배열입니다
-    currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
+    currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다 */
  
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-        level: 5 // 지도의 확대 레벨
+        level: 3 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    
 var map = new daum.maps.Map(mapContainer, mapOption); 
 
 // 장소 검색 객체를 생성합니다
-var ps = new daum.maps.services.Places(map); 
+/* var ps = new daum.maps.services.Places(map); 
 
 // 지도에 idle 이벤트를 등록합니다
 daum.maps.event.addListener(map, 'idle', searchPlaces);
@@ -106,166 +121,335 @@ addEventHandle(contentNode, 'touchstart', daum.maps.event.preventMap);
 placeOverlay.setContent(contentNode);  
 
 // 각 카테고리에 클릭 이벤트를 등록합니다
-addCategoryClickEvent();
+addCategoryClickEvent(); */
 
-// 엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
-function addEventHandle(target, type, callback) {
-    if (target.addEventListener) {
-        target.addEventListener(type, callback);
-    } else {
-        target.attachEvent('on' + type, callback);
-    }
-}
+//----------지도 컨트롤 우측상단 -----
+// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+var mapTypeControl = new daum.maps.MapTypeControl();
+map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
 
-// 카테고리 검색을 요청하는 함수입니다
-function searchPlaces() {
-    if (!currCategory) {
-        return;
-    }
-    
-    // 커스텀 오버레이를 숨깁니다 
-    placeOverlay.setMap(null);
+// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+var zoomControl = new daum.maps.ZoomControl();
+map.addControl(zoomControl, daum.maps.ControlPosition.TOTRIGHT);
+//-------------------------------------------------------------------------------
+////////////////////////////// test START ///////////////////////////
+// 주소-좌표 변환 객체를 생성합니다
+var geocoder = new daum.maps.services.Geocoder();
+var schooladdress= '${school_addr}';
+	if(schooladdress !='') {
+		var myAddress = $.parseJSON('<%=request.getAttribute("json")%>');
 
-    // 지도에 표시되고 있는 마커를 제거합니다
-    removeMarker();
-    
-    ps.categorySearch(currCategory, placesSearchCB, {useMapBounds:true}); 
-}
+	      var overlay  = new Array();;
+	      
+	      function myMarker(number, address) {
+	         // 주소로 좌표를 검색합니다
+	         geocoder.addressSearch(
+	                     //'충북 청주시 흥덕구 진재로 30 연정빌딩',
+	                     address,
+	                     function(result, status) {
+	                        // 정상적으로 검색이 완료됐으면 
+	                        if (status === daum.maps.services.Status.OK) {
 
-// 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-function placesSearchCB(data, status, pagination) {
-    if (status === daum.maps.services.Status.OK) {
+	                           var coords = new daum.maps.LatLng(
+	                                 result[0].y, result[0].x);
 
-        // 정상적으로 검색이 완료됐으면 지도에 마커를 표출합니다
-        displayPlaces(data);
-    } else if (status === daum.maps.services.Status.ZERO_RESULT) {
-        // 검색결과가 없는경우 해야할 처리가 있다면 이곳에 작성해 주세요
+	                           // 결과값으로 받은 위치를 마커로 표시합니다
+	                           
+	                           var marker = new daum.maps.Marker({
+	                              map : map,
+	                              position : coords
+	                           });      
 
-    } else if (status === daum.maps.services.Status.ERROR) {
-        // 에러로 인해 검색결과가 나오지 않은 경우 해야할 처리가 있다면 이곳에 작성해 주세요
-        
-    }
-}
+	                           // 인포윈도우로 장소에 대한 설명을 표시합니다
 
-// 지도에 마커를 표출하는 함수입니다
-function displayPlaces(places) {
+	                           var content;
+	                           if(number > 0)
+	                           {
+	                                    
+	                              
+	                             content = '<div class="wrap">' + 
+	                                 '    <div class="info">' + 
+	                                 '        <div class="title">' + 
+	                                 '            '+myAddress[number-1].off_name+  
+	                                 '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
+	                                 '        </div>' + 
+	                                 '        <div class="body">' + 
+	                                // '             <div class="img">' +
+	                                // '                <img src="http://cfile181.uf.daum.net/image/250649365602043421936D" width="73" height="70">' +
+	                                // '           </div>' +  
+	                                // '            <div class="desc">' + 
+	                                 '                <div class="ellipsis">&nbsp;&nbsp;'+address+'</div>' + 
+	                                // '                <div class="jibun ellipsis">&nbsp;&nbsp;건축년도: '+myAddress[number-1].off_found_year+'년도</div>' + 
+	                                // '                <div class="jibun ellipsis">&nbsp;&nbsp;가격:'+myAddress[number-1].off_price+'만원</div>' + 
+	                                // '                <div class="jibun ellipsis">&nbsp;&nbsp;면적:'+myAddress[number-1].off_area+'평</div>' + 
+ 									   '				   <div><input type="button" id="bu_detail_panel" name="'+number+'" value="상세보기" onclick=bu_detail(this); >' + 
+                                 	//   '                <input type="hidden" id="addr" value=${myAddress.addr[number-1]} >' + 
+                                    //   '                <input type="hidden" id="addr_main" value=${myAddress.addr_main[number-1]} >' + 
+                                    //   '                <input type="hidden" id="addr_sub" value=${myAddress.addr_sub[number-1]} ></div>' + 
+	                                //'            </div>' + 
+	                                 '        </div>' + 
+	                                 '    </div>' +    
+	                                 '</div>';
+	                           }
+	                            else if(number == 0) // 학교
+	                            {
+	                               
+	                               content = '<div class="wrap">' + 
+	                                    '    <div class="info">' + 
+	                                    '        <div class="title">' + 
+	                                    '            ${schoolname}'+  
+	                                    '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
+	                                    '        </div>' + 
+	                                    '        <div class="body">' + 
+	                                    '             <div class="img">' +
+	                                    '                <img src="../main/img/school_img.jpg" width="30" height="30">' +
+	                                    '             </div>' +  
+	                                    '            <div class="desc">' + 
+	                                    '                <div class="ellipsis">'+address+'</div>' + 
+	                             					// <input type="hidden" id="schoolinfo_no" value=${schoolno} >
+	                                    /* '                <div><a href="#" class="schoolinfo_panel" value=${schoolno} target="_blank">상세보기</a></div>' +  */
+	                                    				'<div>' +
+	                                    					'<input type="button" id="schoolinfo_panel" value="상세보기" onclick =detail();>' +
+	                                    					'<input type="hidden" id="schoolinfo_no" value=${schoolno}>' +
+	                                    '				</div>' +
+	                                    '            </div>' + 
+	                                    '        </div>' +
+	                                    '    </div>' +    
+	                                    '</div>';
+	                            }
+	                           
+	                           
+	                           // 커스텀 오버레이가 표시될 위치입니다 
+	                           var position = new daum.maps.LatLng(
+	                                 result[0].y, result[0].x);
 
-    // 몇번째 카테고리가 선택되어 있는지 얻어옵니다
-    // 이 순서는 스프라이트 이미지에서의 위치를 계산하는데 사용됩니다
-    var order = document.getElementById(currCategory).getAttribute('data-order');
+	                           // 커스텀 오버레이를 생성합니다
+	                           overlay[number]  = new daum.maps.CustomOverlay(
+	                                 {
+	                                    map : map,
+	                                    position : marker.getPosition(),
+	                                    content : content
+	                                    /* yAnchor : 1 */
+	                                 });
+	                           
+	                           daum.maps.event.addListener(marker, 'click', function() {
+	                               overlay[number].setMap(map);
+	                           });
+	                           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	                           if(number==0)
+	                           {
+	                              map.setCenter(coords);
+	                           }
 
-    
+	                        }
+	                     });
 
-    for ( var i=0; i<places.length; i++ ) {
+	      }
+	   
 
-            // 마커를 생성하고 지도에 표시합니다
-            var marker = addMarker(new daum.maps.LatLng(places[i].y, places[i].x), order);
+	      for (i = 0; i < myAddress.length; i++) {
 
-            // 마커와 검색결과 항목을 클릭 했을 때
-            // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
-            (function(marker, place) {
-                daum.maps.event.addListener(marker, 'click', function() {
-                    displayPlaceInfo(place);
-                });
-            })(marker, places[i]);
-    }
-}
+	         myMarker(i + 1, myAddress[i].off_addr);
+	      } 
+	      myMarker(0, schooladdress);
+	      
+	      
+	      
+	      // 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+	      function closeOverlay(number) {
+	          overlay[number].setMap(null);     
+	      }
+	      
+	      function detail(){
+	            //$('#schoolinfo_print').hide();
+	         
+	                  var schoolno = $('#schoolinfo_no').val();
+	                   //var schoolno=$(this).attr("value");
+	                     $.ajax({
+	                        type:'post',
+	                        url:'schoolinfo.do',
+	                        data : {"schoolno": schoolno},
+	                        success:function(res)
+	                        {  
+	                        	$('.panel').hide();
+	               /*            $('#print_recommand').hide();  
+	                           $('#print_seouluniv').hide();  
+	                           $('#print_schoolrate').hide();  
+	                           $('#print_bu_detail').hide();  
+	                           $('#print_schoolinfo').hide(); */  
+	                              
+	                         $('#schoolinfo_print').show();
+	                           $('#schoolinfo_print').html(res);
+	                        }
+	                     });
+	               
+	         }
+	      
+	      function bu_detail2(n){
+	          //$('#schoolinfo_print').hide();
+	       
+	               /*  var addr=$('#addr').val();
+	                var number_main=$('#addr_main').val();
+	                var number_sub=$('#addr_sub').val(); */
+	                 //var schoolno=$(this).attr("value");
+	                var addr= myAddress[n-1].addr;
+	                var number_main=myAddress[n-1].addr_main;
+	                var number_sub=myAddress[n-1].addr_sub;
 
-// 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-function addMarker(position, order) {
-    var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png', // 마커 이미지 url, 스프라이트 이미지를 씁니다
-        imageSize = new daum.maps.Size(27, 28),  // 마커 이미지의 크기
-        imgOptions =  {
-            spriteSize : new daum.maps.Size(72, 208), // 스프라이트 이미지의 크기
-            spriteOrigin : new daum.maps.Point(46, (order*36)), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
-            offset: new daum.maps.Point(11, 28) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
-        },
-        markerImage = new daum.maps.MarkerImage(imageSrc, imageSize, imgOptions),
-            marker = new daum.maps.Marker({
-            position: position, // 마커의 위치
-            image: markerImage 
-        });
+	                
+	                   $.ajax({
+	                      type:'post',
+	                      url:'bu_detail.do',
+	                      data : 
+	                      {
+	                    	  "ADDR": addr, 
+	                    	  "NUMBER_MAIN" : number_main, 
+	                    	  "NUMBER_SUB" : number_sub 
+	                      },
+	                      success:function(res)
+	                      {  
+	                      	$('.panel').hide();
+	             /*          $('#print_recommand').hide();  
+	                         $('#print_seouluniv').hide();  
+	                         $('#print_schoolrate').hide();  
+	                         $('#print_bu_detail').hide();  
+	                         $('#print_schoolinfo').hide(); */  
+	                            
+	                       $('#bu_detail_print').show();
+	                         $('#bu_detail_print').html(res);
+	                      }
+	                   });
+	             
+	       }
 
-    marker.setMap(map); // 지도 위에 마커를 표출합니다
-    markers.push(marker);  // 배열에 생성된 마커를 추가합니다
+	}
+	function bu_detail(btn)
+	{
+		bu_detail2(btn.name);
+	}
+	
+////////////////////////추천 리스트 눌렀을 때 좌표 찍
 
-    return marker;
-}
+	var building_name= '${building_name}';
+		if(building_name !='') {
+			var myAddress = $.parseJSON('<%=request.getAttribute("rec_list")%>');
 
-// 지도 위에 표시되고 있는 마커를 모두 제거합니다
-function removeMarker() {
-    for ( var i = 0; i < markers.length; i++ ) {
-        markers[i].setMap(null);
-    }   
-    markers = [];
-}
+		      var overlay  = new Array();
+		      
+		      function myMarker(number, address) {
+		         // 주소로 좌표를 검색합니다
+		         geocoder.addressSearch(
+		                     //'충북 청주시 흥덕구 진재로 30 연정빌딩',
+		                     address,
+		                     function(result, status) {
+		                        // 정상적으로 검색이 완료됐으면 
+		                        if (status === daum.maps.services.Status.OK) {
 
-// 클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
-function displayPlaceInfo (place) {
-    var content = '<div class="placeinfo">' +
-                    '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
+		                           var coords = new daum.maps.LatLng(
+		                                 result[0].y, result[0].x);
 
-    if (place.road_address_name) {
-        content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
-                    '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
-    }  else {
-        content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
-    }                
-   
-    content += '    <span class="tel">' + place.phone + '</span>' + 
-                '</div>' + 
-                '<div class="after"></div>';
+		                           // 결과값으로 받은 위치를 마커로 표시합니다
+		                           
+		                           var marker = new daum.maps.Marker({
+		                              map : map,
+		                              position : coords
+		                           });      
 
-    contentNode.innerHTML = content;
-    placeOverlay.setPosition(new daum.maps.LatLng(place.y, place.x));
-    placeOverlay.setMap(map);  
-}
+		                           // 인포윈도우로 장소에 대한 설명을 표시합니다
 
+		                           var content;
+		                           if(number == 0)
+		                           {
+		                                    
+		                              
+		                             content = '<div class="wrap">' + 
+		                                 '    <div class="info">' + 
+		                                 '        <div class="title">' + 
+		                                 '            '+myAddress[0].rec_name+  
+		                                 '            <div class="close" onclick="closeOverlay('+number+')" title="닫기"></div>' + 
+		                                 '        </div>' + 
+		                                 
+		                                 '        <div class="body">' + 
+		                                 '          <div class="ellipsis">&nbsp;&nbsp;'+address+
+		                                 '          </div>' + 
+		                                 '        <div>' +
+		                                 '          <input type="button" id="bu_detail_panel" name="'+number+'" value="상세보기" onclick=rec_bu_detail(this); >' + 
+			                             '        </div>' + 
+		                                 '        </div>' + 
+		                                 '    </div>'+
+		                                 ' </div>';
+		                           }
+		                           
+		                           
+		                           
+		                           // 커스텀 오버레이가 표시될 위치입니다 
+		                           var position = new daum.maps.LatLng(
+		                                 result[0].y, result[0].x);
 
-// 각 카테고리에 클릭 이벤트를 등록합니다
-function addCategoryClickEvent() {
-    var category = document.getElementById('category'),
-        children = category.children;
+		                           // 커스텀 오버레이를 생성합니다
+		                           overlay[number]  = new daum.maps.CustomOverlay(
+		                                 {
+		                                    map : map,
+		                                    position : marker.getPosition(),
+		                                    content : content
+		                                    /* yAnchor : 1 */
+		                                 });
+		                           
+		                           daum.maps.event.addListener(marker, 'click', function() {
+		                               overlay[number].setMap(map);
+		                           });
+		                           // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		                          
+		                              map.setCenter(coords);
+		                           
+		                        }
+		                     });
 
-    for (var i=0; i<children.length; i++) {
-        children[i].onclick = onClickCategory;
-    }
-}
+		      }
+		      myMarker(0, myAddress[0].rec_fullAddr);
+		      
+		      
+		      function rec_bu_detail2(){
+		          //$('#schoolinfo_print').hide();
+		       
+		               /*  var addr=$('#addr').val();
+		                var number_main=$('#addr_main').val();
+		                var number_sub=$('#addr_sub').val(); */
+		                 //var schoolno=$(this).attr("value");
+		                var addr= myAddress[0].rec_addr;
+		                var number_main=myAddress[0].rec_numbermain;
+		                var number_sub=myAddress[0].rec_numbersub;
 
-// 카테고리를 클릭했을 때 호출되는 함수입니다
-function onClickCategory() {
-    var id = this.id,
-        className = this.className;
+		                
+		                   $.ajax({
+		                      type:'post',
+		                      url:'bu_detail.do',
+		                      data : 
+		                      {
+		                    	  "ADDR": addr, 
+		                    	  "NUMBER_MAIN" : number_main, 
+		                    	  "NUMBER_SUB" : number_sub 
+		                      },
+		                      success:function(res)
+		                      {  
+		                      	$('.panel').hide(); 
+		                            
+		                       $('#bu_detail_print').show();
+		                         $('#bu_detail_print').html(res);
+		                      }
+		                   });
+		             
+		       }
 
-    placeOverlay.setMap(null);
-
-    if (className === 'on') {
-        currCategory = '';
-        changeCategoryClass();
-        removeMarker();
-    } else {
-        currCategory = id;
-        changeCategoryClass(this);
-        searchPlaces();
-    }
-}
-
-// 클릭된 카테고리에만 클릭된 스타일을 적용하는 함수입니다
-function changeCategoryClass(el) {
-    var category = document.getElementById('category'),
-        children = category.children,
-        i;
-
-    for ( i=0; i<children.length; i++ ) {
-        children[i].className = '';
-    }
-
-    if (el) {
-        el.className = 'on';
-    } 
-} 
+		}
+		function rec_bu_detail(btn)
+		{
+			rec_bu_detail2();
+		}
+      
 </script>
-		<!-- **** Welcome Maps Area End **** -->
+	<!-- **** Welcome Maps Area End **** -->
 
 	<!-- </div> -->
 </body>
